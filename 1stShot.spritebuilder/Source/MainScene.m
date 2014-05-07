@@ -7,7 +7,7 @@
 //
 
 #import "MainScene.h"
-static const CGFloat scrollSpeed = 80.f;
+
 
 @implementation MainScene
 
