@@ -7,10 +7,11 @@
 //
 
 #import "CCNode.h"
-#import <CoreMotion/CoreMotion.h>
 
-@interface Gameplay : CCNode <CCPhysicsCollisionDelegate>
+@interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic)CMMotionManager *motionManager;
+
+-(void)screenWasSwipedUp;
+-(void)screenWasSwipedDown;
 
 @end

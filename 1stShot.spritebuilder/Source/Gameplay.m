@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSInteger _points;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_label;
-    CGFloat _yAcceleration;
+    CGFloat _swiped;
 }
 
 // is called when CCB file has completed loading
@@ -72,25 +72,58 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     _scrollSpeed = 80.f;
     
-    self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = .2;
+// commenting out motion manager not going to used it
+// to be deleted later
+//    self.motionManager = [[CMMotionManager alloc] init];
+//    self.motionManager.accelerometerUpdateInterval = .2;
+//    
+//    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+//                                             withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+//                                                 [self outputAccelerationData:accelerometerData.acceleration];
+//                                                 if(error){
+//                                                     
+//                                                     NSLog(@"%@", error);
+//                                                 }
+//                                             }];
     
-    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                             withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-                                                 [self outputAccelerationData:accelerometerData.acceleration];
-                                                 if(error){
-                                                     
-                                                     NSLog(@"%@", error);
-                                                 }
-                                             }];
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedUp)];
+    swipeUp.numberOfTouchesRequired = 1;
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeUp];
+    
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedDown)];
+    swipeDown.numberOfTouchesRequired = 1;
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
+
+}
+
+-(void)screenWasSwipedUp
+{
+//    CCLOG(@"%s","screen swiped up");
+    _swiped = 0.5f;
+    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
+    CCLOG(@"%f", _hero.position.y);
+
+}
+
+-(void)screenWasSwipedDown
+{
+//    CCLOG(@"%s","screen swiped down");
+    _swiped = -0.5f;
+    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
+    CCLOG(@"%f", _hero.position.y);
 }
 
 - (void)update:(CCTime)delta
 {
     if(!_gameOver){
-    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _yAcceleration * yAccelSpeed);
+    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+//    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
     // clamp velocity
-//    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 200.f);
+//    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 0.5f);
 //    _hero.physicsBody.velocity = ccp(0, yVelocity);
     _physicsNode.position = ccp(_physicsNode.position.x - (scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
@@ -147,11 +180,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
 }
 
--(void)outputAccelerationData:(CMAcceleration)acceleration
-{
-    _label.string = [NSString stringWithFormat:@"%f", acceleration.y];
-    _yAcceleration = acceleration.y;
-}
+//-(void)outputAccelerationData:(CMAcceleration)acceleration
+//{
+//    _label.string = [NSString stringWithFormat:@"%f", acceleration.y];
+//    _yAcceleration = acceleration.y;
+//}
 
 // called on every touch in this scene
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
