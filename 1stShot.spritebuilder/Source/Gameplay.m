@@ -9,10 +9,10 @@
 #import "Gameplay.h"
 #import "Obstacle.h"
 
-static const CGFloat scrollSpeed = 80.f;
+static const CGFloat scrollSpeed = 100.f;
 static const CGFloat yAccelSpeed = 10.f;
 static const CGFloat firstObstaclePosition = 280.f;
-static const CGFloat distanceBetweenObstacles = 160.f;
+static const CGFloat distanceBetweenObstacles = 320.f;
 
 // fixing the drawing order. forcing the ground to be drawn above the pipes.
 typedef NS_ENUM(NSInteger, DrawingOrder) {
