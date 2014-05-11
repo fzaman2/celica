@@ -29,7 +29,7 @@ static const CGFloat maximumYPositionTopPipe = maximumYPositionBottomPipe - pipe
     _target.position = ccp(_target.position.x,_topPipe.position.y + pipeDistance/2);
     _bottomPipe.position = ccp(_bottomPipe.position.x, _topPipe.position.y + pipeDistance);
 //    CCLOG(@"%f",_bottomPipe.position.x);
-//    CCLOG(@"%f",_bottomPipe.position.y);
+    CCLOG(@"%f",_topPipe.position.y);
 }
 
 - (void)didLoadFromCCB {

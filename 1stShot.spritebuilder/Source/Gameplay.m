@@ -41,6 +41,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_label;
     CGFloat _swiped;
+    CGFloat _newHeroPosition;
 }
 
 // is called when CCB file has completed loading
@@ -98,14 +99,16 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
 
+    _newHeroPosition = _hero.position.y;
 }
 
 -(void)screenWasSwipedUp
 {
 //    CCLOG(@"%s","screen swiped up");
     _swiped = 0.5f;
-    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
-    CCLOG(@"%f", _hero.position.y);
+//    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
+    _newHeroPosition = _hero.position.y;
+//    CCLOG(@"%f", _hero.position.y);
 
 }
 
@@ -113,14 +116,26 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 {
 //    CCLOG(@"%s","screen swiped down");
     _swiped = -0.5f;
-    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
-    CCLOG(@"%f", _hero.position.y);
+//    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
+    _newHeroPosition = _hero.position.y;
+//    CCLOG(@"%f", _hero.position.y);
 }
 
 - (void)update:(CCTime)delta
 {
     if(!_gameOver){
-    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+        if (_hero.position.y - _newHeroPosition >= 80.0)
+        {
+            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+        }
+        else if(_hero.position.y - _newHeroPosition <= -80.0)
+        {
+            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+        }
+        else
+        {
+            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
+        }
 //    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
     // clamp velocity
 //    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 0.5f);
