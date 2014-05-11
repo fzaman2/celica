@@ -449,10 +449,6 @@
 							<key>points</key>
 							<array>
 								<array>
-									<real>25.185869216918945</real>
-									<real>13.149467468261719</real>
-								</array>
-								<array>
 									<real>25.535942077636719</real>
 									<real>3.9031441211700439</real>
 								</array>
@@ -465,8 +461,8 @@
 									<real>22.450735092163086</real>
 								</array>
 								<array>
-									<real>27.231363296508789</real>
-									<real>29.370563507080078</real>
+									<real>26.242361068725586</real>
+									<real>28.88862419128418</real>
 								</array>
 							</array>
 						</dict>
