@@ -7,7 +7,10 @@
 //
 
 #import "CCNode.h"
+#import <CoreMotion/CoreMotion.h>
 
 @interface Gameplay : CCNode <CCPhysicsCollisionDelegate>
+
+@property (strong, nonatomic)CMMotionManager *motionManager;
 
 @end

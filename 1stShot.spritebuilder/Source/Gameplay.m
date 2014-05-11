@@ -10,6 +10,7 @@
 #import "Obstacle.h"
 
 static const CGFloat scrollSpeed = 80.f;
+static const CGFloat yAccelSpeed = 10.f;
 static const CGFloat firstObstaclePosition = 280.f;
 static const CGFloat distanceBetweenObstacles = 160.f;
 
@@ -38,6 +39,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CGFloat _elapsedTime;
     NSInteger _points;
     CCLabelTTF *_scoreLabel;
+    CCLabelTTF *_label;
+    CGFloat _yAcceleration;
 }
 
 // is called when CCB file has completed loading
@@ -68,15 +71,27 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _hero.zOrder = DrawingOrdeHero;
     
     _scrollSpeed = 80.f;
+    
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval = .2;
+    
+    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+                                             withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+                                                 [self outputAccelerationData:accelerometerData.acceleration];
+                                                 if(error){
+                                                     
+                                                     NSLog(@"%@", error);
+                                                 }
+                                             }];
 }
 
 - (void)update:(CCTime)delta
 {
     if(!_gameOver){
-    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _yAcceleration * yAccelSpeed);
     // clamp velocity
-    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 200.f);
-    _hero.physicsBody.velocity = ccp(0, yVelocity);
+//    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 200.f);
+//    _hero.physicsBody.velocity = ccp(0, yVelocity);
     _physicsNode.position = ccp(_physicsNode.position.x - (scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
     for (CCNode *ground in _grounds) {
@@ -91,17 +106,17 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     }
     // limit the rotation of the fly and start a downward rotation if no touch occured in a while.
-    _sinceTouch += delta;
-    _elapsedTime += delta;
-    _hero.rotation = clampf(_hero.rotation, -30.f, 90.f);
-    if (_hero.physicsBody.allowsRotation) {
-        float angularVelocity = clampf(_hero.physicsBody.angularVelocity, -2.f, 1.f);
-        _hero.physicsBody.angularVelocity = angularVelocity;
-    }
-    if ((_sinceTouch > 0.5f)) {
-        [_hero.physicsBody applyAngularImpulse:-10000.f*delta];
-//        _sinceTouch = 0.f;
-    }
+//    _sinceTouch += delta;
+//    _elapsedTime += delta;
+//    _hero.rotation = clampf(_hero.rotation, -30.f, 90.f);
+//    if (_hero.physicsBody.allowsRotation) {
+//        float angularVelocity = clampf(_hero.physicsBody.angularVelocity, -2.f, 1.f);
+//        _hero.physicsBody.angularVelocity = angularVelocity;
+//    }
+//    if ((_sinceTouch > 0.5f)) {
+//        [_hero.physicsBody applyAngularImpulse:-10000.f*delta];
+////        _sinceTouch = 0.f;
+//    }
     if (_elapsedTime > 0.5f)
     {
 //        [_hero.physicsBody applyImpulse:ccp(0, 450.f)];
@@ -132,13 +147,19 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
 }
 
+-(void)outputAccelerationData:(CMAcceleration)acceleration
+{
+    _label.string = [NSString stringWithFormat:@"%f", acceleration.y];
+    _yAcceleration = acceleration.y;
+}
+
 // called on every touch in this scene
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [self launchMissile];
     
     if (!_gameOver) {
-        [_hero.physicsBody applyImpulse:ccp(0, 400.f)];
-        [_hero.physicsBody applyAngularImpulse:10000.f];
+//        [_hero.physicsBody applyImpulse:ccp(0, 400.f)];
+//        [_hero.physicsBody applyAngularImpulse:10000.f];
         _sinceTouch = 0.f;
     }
 
