@@ -444,7 +444,7 @@
 						<key>type</key>
 						<string>CCBFile</string>
 						<key>value</key>
-						<string>Hero.ccb</string>
+						<string>Target.ccb</string>
 					</dict>
 				</array>
 				<key>selected</key>

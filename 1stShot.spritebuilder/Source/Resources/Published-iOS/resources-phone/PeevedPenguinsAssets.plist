@@ -20,7 +20,7 @@
 		<key>PeevedPenguinsAssets/bear.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 837}, {80, 78}}</string>
+			<string>{{323, 849}, {80, 78}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -33,7 +33,7 @@
 		<key>PeevedPenguinsAssets/beararm.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{963, 235}, {44, 35}}</string>
+			<string>{{963, 26}, {44, 35}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -46,7 +46,7 @@
 		<key>PeevedPenguinsAssets/bearnoarms.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 919}, {80, 78}}</string>
+			<string>{{323, 931}, {80, 78}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -59,7 +59,7 @@
 		<key>PeevedPenguinsAssets/button.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 668}, {167, 152}}</string>
+			<string>{{323, 680}, {167, 152}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -72,7 +72,7 @@
 		<key>PeevedPenguinsAssets/catapult.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 451}, {215, 79}}</string>
+			<string>{{323, 463}, {215, 79}}</string>
 			<key>offset</key>
 			<string>{0, -6}</string>
 			<key>rotated</key>
@@ -85,7 +85,7 @@
 		<key>PeevedPenguinsAssets/catapultarm.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{963, 272}, {42, 177}}</string>
+			<string>{{963, 63}, {42, 177}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -98,7 +98,7 @@
 		<key>PeevedPenguinsAssets/flyingpenguin.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{59, 386}, {25, 25}}</string>
+			<string>{{1, 976}, {25, 25}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -124,20 +124,33 @@
 		<key>PeevedPenguinsAssets/jet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{963, 1}, {207, 53}}</string>
+			<string>{{963, 273}, {104, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
 			<true/>
 			<key>sourceColorRect</key>
-			<string>{{9, 9}, {207, 53}}</string>
+			<string>{{4, 4}, {104, 27}}</string>
 			<key>sourceSize</key>
-			<string>{223, 71}</string>
+			<string>{111, 35}</string>
+		</dict>
+		<key>PeevedPenguinsAssets/jet2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{992, 357}, {104, 27}}</string>
+			<key>offset</key>
+			<string>{1, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{4, 4}, {104, 27}}</string>
+			<key>sourceSize</key>
+			<string>{111, 35}</string>
 		</dict>
 		<key>PeevedPenguinsAssets/longblock.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1009, 235}, {91, 13}}</string>
+			<string>{{1009, 26}, {91, 13}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -150,7 +163,7 @@
 		<key>PeevedPenguinsAssets/menubackground.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 451}, {568, 320}}</string>
+			<string>{{1, 406}, {568, 320}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -163,7 +176,7 @@
 		<key>PeevedPenguinsAssets/missile.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{112, 386}, {64, 18}}</string>
+			<string>{{1, 386}, {64, 18}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -176,11 +189,11 @@
 		<key>PeevedPenguinsAssets/seal.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{32, 386}, {27, 25}}</string>
+			<string>{{963, 379}, {27, 25}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {27, 25}}</string>
 			<key>sourceSize</key>
@@ -189,7 +202,7 @@
 		<key>PeevedPenguinsAssets/squareblock.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{86, 386}, {24, 24}}</string>
+			<string>{{28, 976}, {24, 24}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -202,7 +215,7 @@
 		<key>PeevedPenguinsAssets/tallblock.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{963, 210}, {23, 47}}</string>
+			<string>{{963, 1}, {23, 47}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -215,11 +228,11 @@
 		<key>PeevedPenguinsAssets/taperedblock.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 417}, {113, 27}}</string>
+			<string>{{994, 242}, {113, 27}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {113, 27}}</string>
 			<key>sourceSize</key>
@@ -228,7 +241,7 @@
 		<key>PeevedPenguinsAssets/waitingpenguin.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 386}, {29, 29}}</string>
+			<string>{{963, 242}, {29, 29}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>

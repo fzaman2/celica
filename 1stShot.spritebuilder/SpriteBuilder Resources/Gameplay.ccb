@@ -449,20 +449,24 @@
 							<key>points</key>
 							<array>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>25.185869216918945</real>
+									<real>13.149467468261719</real>
 								</array>
 								<array>
-									<real>0.0</real>
-									<real>32</real>
+									<real>25.535942077636719</real>
+									<real>3.9031441211700439</real>
 								</array>
 								<array>
-									<real>32</real>
-									<real>32</real>
+									<real>106.8046875</real>
+									<real>11.521549224853516</real>
 								</array>
 								<array>
-									<real>32</real>
-									<real>0.0</real>
+									<real>83.423576354980469</real>
+									<real>22.450735092163086</real>
+								</array>
+								<array>
+									<real>27.231363296508789</real>
+									<real>29.370563507080078</real>
 								</array>
 							</array>
 						</dict>
@@ -483,7 +487,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>166.91195678710938</real>
+									<real>100</real>
 									<real>323.7440185546875</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -512,6 +516,8 @@
 								<string>Hero.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1249,8 +1255,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
