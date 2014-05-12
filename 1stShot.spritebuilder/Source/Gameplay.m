@@ -9,7 +9,7 @@
 #import "Gameplay.h"
 #import "Obstacle.h"
 
-static const CGFloat scrollSpeed = 100.f;
+//static const CGFloat scrollSpeed = 100.f;
 static const CGFloat yAccelSpeed = 10.f;
 static const CGFloat firstObstaclePosition = 280.f;
 static const CGFloat distanceBetweenObstacles = 320.f;
@@ -66,11 +66,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         ground.physicsBody.collisionType = @"level";
         ground.zOrder = DrawingOrderGround;
     }
-    // set collision txpe
+    // set collision type
     _hero.physicsBody.collisionType = @"hero";
     _hero.zOrder = DrawingOrdeHero;
     
-    _scrollSpeed = 80.f;
+    _scrollSpeed = 100.f;
     
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedUp)];
     swipeUp.numberOfTouchesRequired = 1;
@@ -104,18 +104,18 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if(!_gameOver){
         if (_hero.position.y - _newHeroPosition >= 80.0)
         {
-            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
         }
         else if(_hero.position.y - _newHeroPosition <= -80.0)
         {
-            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y);
+            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
         }
         else
         {
-            _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
+            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
         }
-        CCLOG(@"%f",_hero.position.y);
-    _physicsNode.position = ccp(_physicsNode.position.x - (scrollSpeed *delta), _physicsNode.position.y);
+//        CCLOG(@"%f",_hero.position.y);
+    _physicsNode.position = ccp(_physicsNode.position.x - (_scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
     for (CCNode *ground in _grounds) {
         // get the world position of the ground
@@ -184,41 +184,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
 }
 
--(void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair seal:(CCNode *)nodeA wildcard:(CCNode *)nodeB
-{
-    float energy = [pair totalKineticEnergy];
-    
-    // if energy is large enough, remove the seal
-    if (energy > 2000.f)
-    {
-        [self sealRemoved:nodeA];
-        [self missileRemoved:nodeA];
-    }
-}
-
--(void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair missile:(CCNode *)nodeA wildcard:(CCNode *)nodeB
+-(void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile level:(CCNode *)level
 {
     float energy = [pair totalKineticEnergy];
     
     // if energy is large enough, remove the missile
     if (energy > 2000.f)
     {
-        [self missileRemoved:nodeA];
+        [self missileRemoved:missile];
     }
-}
-
-- (void)sealRemoved:(CCNode *)seal {
-    // load particle effect
-    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
-    // make the particle effect clean itself up, once it is completed
-    explosion.autoRemoveOnFinish = TRUE;
-    // place the particle effect on the seals position
-    explosion.position = seal.position;
-    // add the particle effect to the same node the seal is on
-    [seal.parent addChild:explosion];
-    
-    // finally, remove the destroyed seal
-    [seal removeFromParent];
 }
 
 - (void)missileRemoved:(CCNode *)missile {
@@ -233,6 +207,19 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     // finally, remove the missile
     [missile removeFromParent];
+}
+- (void)heroRemoved:(CCNode *)hero {
+    // load particle effect
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
+    // make the particle effect clean itself up, once it is completed
+    explosion.autoRemoveOnFinish = TRUE;
+    // place the particle effect on the hero position
+    explosion.position = hero.position;
+    // add the particle effect to the same node the hero is on
+    [hero.parent addChild:explosion];
+    
+    // finally, remove the missile
+    [hero removeFromParent];
 }
 
 - (void)spawnNewObstacle {
@@ -252,6 +239,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero level:(CCNode *)level {
+    
+    [self heroRemoved:hero];
     [self gameOver];
     return TRUE;
 }
@@ -273,8 +262,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _scrollSpeed = 0.f;
         _gameOver = TRUE;
         _restartButton.visible = TRUE;
-        _hero.rotation = 90.f;
-        _hero.physicsBody.allowsRotation = FALSE;
         [_hero stopAllActions];
         CCActionMoveBy *moveBy = [CCActionMoveBy actionWithDuration:0.2f position:ccp(-2, 2)];
         CCActionInterval *reverseMovement = [moveBy reverse];

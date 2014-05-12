@@ -51,8 +51,33 @@ static const CGFloat pipeDistance = 100.f;
     _topPipe.physicsBody.sensor = TRUE;
     _bottomPipe.physicsBody.collisionType = @"level";
     _bottomPipe.physicsBody.sensor = TRUE;
-    _target.physicsBody.collisionType = @"level";
+    _target.physicsBody.collisionType = @"target";
     _target.physicsBody.sensor = TRUE;
+}
+
+-(void)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair target:(CCNode *)target level:(CCNode *)level
+{
+    float energy = [pair totalKineticEnergy];
+    
+    // if energy is large enough, remove the missile
+    if (energy > 2000.f)
+    {
+        [self targetRemoved:target];
+    }
+}
+
+- (void)targetRemoved:(CCNode *)target {
+    // load particle effect
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
+    // make the particle effect clean itself up, once it is completed
+    explosion.autoRemoveOnFinish = TRUE;
+    // place the particle effect on the target position
+    explosion.position = target.position;
+    // add the particle effect to the same node the target is on
+    [target.parent addChild:explosion];
+    
+    // finally, remove the missile
+    [target removeFromParent];
 }
 
 @end
