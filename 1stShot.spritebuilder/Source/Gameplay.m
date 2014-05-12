@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 @implementation Gameplay
 {
     CCPhysicsNode *_physicsNode;
-    CCNode *_fastJet;
     CCNode *_levelNode;
     CCNode *_contentNode;
     CCSprite *_hero;
@@ -59,7 +58,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _obstacles = [NSMutableArray array];
     [self spawnNewObstacle];
     [self spawnNewObstacle];
-    [self spawnNewObstacle];
+//    [self spawnNewObstacle];
     
     // fixing the drawing order. forcing the ground to be drawn above the pipes.
     for (CCNode *ground in _grounds) {
@@ -72,20 +71,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _hero.zOrder = DrawingOrdeHero;
     
     _scrollSpeed = 80.f;
-    
-// commenting out motion manager not going to used it
-// to be deleted later
-//    self.motionManager = [[CMMotionManager alloc] init];
-//    self.motionManager.accelerometerUpdateInterval = .2;
-//    
-//    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-//                                             withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-//                                                 [self outputAccelerationData:accelerometerData.acceleration];
-//                                                 if(error){
-//                                                     
-//                                                     NSLog(@"%@", error);
-//                                                 }
-//                                             }];
     
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedUp)];
     swipeUp.numberOfTouchesRequired = 1;
@@ -104,21 +89,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 -(void)screenWasSwipedUp
 {
-//    CCLOG(@"%s","screen swiped up");
     _swiped = 0.5f;
-//    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
     _newHeroPosition = _hero.position.y;
-//    CCLOG(@"%f", _hero.position.y);
-
 }
 
 -(void)screenWasSwipedDown
 {
-//    CCLOG(@"%s","screen swiped down");
     _swiped = -0.5f;
-//    _hero.position = ccp(_hero.position.x, _hero.position.y + _swiped * yAccelSpeed);
     _newHeroPosition = _hero.position.y;
-//    CCLOG(@"%f", _hero.position.y);
 }
 
 - (void)update:(CCTime)delta
@@ -136,10 +114,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         {
             _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
         }
-//    _hero.position = ccp(_hero.position.x + delta * scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
-    // clamp velocity
-//    float yVelocity = clampf(_hero.physicsBody.velocity.y, -1 * MAXFLOAT, 0.5f);
-//    _hero.physicsBody.velocity = ccp(0, yVelocity);
+        CCLOG(@"%f",_hero.position.y);
     _physicsNode.position = ccp(_physicsNode.position.x - (scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
     for (CCNode *ground in _grounds) {
@@ -153,25 +128,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     
     }
-    // limit the rotation of the fly and start a downward rotation if no touch occured in a while.
-//    _sinceTouch += delta;
-//    _elapsedTime += delta;
-//    _hero.rotation = clampf(_hero.rotation, -30.f, 90.f);
-//    if (_hero.physicsBody.allowsRotation) {
-//        float angularVelocity = clampf(_hero.physicsBody.angularVelocity, -2.f, 1.f);
-//        _hero.physicsBody.angularVelocity = angularVelocity;
-//    }
-//    if ((_sinceTouch > 0.5f)) {
-//        [_hero.physicsBody applyAngularImpulse:-10000.f*delta];
-////        _sinceTouch = 0.f;
-//    }
-    if (_elapsedTime > 0.5f)
-    {
-//        [_hero.physicsBody applyImpulse:ccp(0, 450.f)];
-//        [_hero.physicsBody applyAngularImpulse:10000.f];
-        _elapsedTime = 0.f;
-    }
-    
     
     // Spawning new obstacles when old ones leave the screen
     
@@ -195,20 +151,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
 }
 
-//-(void)outputAccelerationData:(CMAcceleration)acceleration
-//{
-//    _label.string = [NSString stringWithFormat:@"%f", acceleration.y];
-//    _yAcceleration = acceleration.y;
-//}
-
 // called on every touch in this scene
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    [self launchMissile];
     
     if (!_gameOver) {
-//        [_hero.physicsBody applyImpulse:ccp(0, 400.f)];
-//        [_hero.physicsBody applyAngularImpulse:10000.f];
-        _sinceTouch = 0.f;
+        [self launchMissile];
     }
 
 }
@@ -216,15 +163,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)launchMissile {
     // loads the Missile.ccb we have set up in Spritebuilder
     CCNode* missile = [CCBReader load:@"Missile"];
-    // position the missile at the bowl of the catapult
-    missile.position = ccpAdd(_fastJet.position, ccp(-10, -20));
+    // position the missile at the bottom of hero
+    missile.position = ccpAdd(_hero.position, ccp(-10, -15));
     
     // add the missile to the physicsNode of this scene (because it has physics enabled)
     [_physicsNode addChild:missile];
     
     // manually create & apply a force to launch the missile
     CGPoint launchDirection = ccp(1, 0);
-    CGPoint force = ccpMult(launchDirection, 16000);
+    CGPoint force = ccpMult(launchDirection, 30000);
     [missile.physicsBody applyForce:force];
     
     // ensure followed object is in visible are when starting
@@ -313,7 +260,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [goal removeFromParent];
     _points++;
     _scoreLabel.string = [NSString stringWithFormat:@"%d", _points];
-//    CCLOG(@"%d",_points);
     return TRUE;
 }
 

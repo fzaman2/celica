@@ -401,6 +401,44 @@
 				<string>_target</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
+				<key>physicsBody</key>
+				<dict>
+					<key>affectedByGravity</key>
+					<true/>
+					<key>allowsRotation</key>
+					<true/>
+					<key>bodyShape</key>
+					<integer>0</integer>
+					<key>cornerRadius</key>
+					<real>0.0</real>
+					<key>density</key>
+					<real>1</real>
+					<key>dynamic</key>
+					<false/>
+					<key>elasticity</key>
+					<real>0.30000001192092896</real>
+					<key>friction</key>
+					<real>0.30000001192092896</real>
+					<key>points</key>
+					<array>
+						<array>
+							<real>4.4730892181396484</real>
+							<real>17.858283996582031</real>
+						</array>
+						<array>
+							<real>5.4984798431396484</real>
+							<real>2.2142956256866455</real>
+						</array>
+						<array>
+							<real>30.354707717895508</real>
+							<real>2.455723762512207</real>
+						</array>
+						<array>
+							<real>29.478513717651367</real>
+							<real>19.550992965698242</real>
+						</array>
+					</array>
+				</dict>
 				<key>properties</key>
 				<array>
 					<dict>

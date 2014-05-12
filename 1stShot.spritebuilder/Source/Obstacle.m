@@ -22,19 +22,19 @@ static const CGFloat pipeDistance = 100.f;
     switch(_random)
     {
         case 0:
-            _yPosition = 60;
+            _yPosition = 100;
             break;
         case 1:
-            _yPosition = 140;
+            _yPosition = 180;
             break;
         case 2:
-            _yPosition = 220;
+            _yPosition = 260;
             break;
         case 3:
-            _yPosition = 300;
+            _yPosition = 340;
             break;
         case 4:
-            _yPosition = 380;
+            _yPosition = 420;
             break;
         default:
             break;
@@ -51,8 +51,8 @@ static const CGFloat pipeDistance = 100.f;
     _topPipe.physicsBody.sensor = TRUE;
     _bottomPipe.physicsBody.collisionType = @"level";
     _bottomPipe.physicsBody.sensor = TRUE;
-//    _target.physicsBody.collisionType = @"level";
-//    _target.physicsBody.sensor = TRUE;
+    _target.physicsBody.collisionType = @"level";
+    _target.physicsBody.sensor = TRUE;
 }
 
 @end
