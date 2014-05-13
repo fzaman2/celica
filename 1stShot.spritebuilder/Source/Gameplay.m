@@ -84,6 +84,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
 
+    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
+    tapped.numberOfTapsRequired = 1;
+    tapped.numberOfTouchesRequired = 1;
+    tapped.cancelsTouchesInView = NO;
+    
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:tapped];
+    
     _newHeroPosition = _hero.position.y;
 }
 
@@ -116,6 +123,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
 }
 
+-(void)screenTapped
+{
+    if (!_gameOver) {
+        [self launchMissile];
+    }
+}
+
 - (void)update:(CCTime)delta
 {
     if(!_gameOver){
@@ -131,7 +145,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         {
             _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
         }
-        CCLOG(@"%f",_hero.position.y);
+//        CCLOG(@"%f",_hero.position.y);
     _physicsNode.position = ccp(_physicsNode.position.x - (_scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
     for (CCNode *ground in _grounds) {
@@ -168,15 +182,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
 }
 
-// called on every touch in this scene
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
-    if (!_gameOver) {
-        [self launchMissile];
-    }
-
-}
-
 - (void)launchMissile {
     // loads the Missile.ccb we have set up in Spritebuilder
     CCNode* missile = [CCBReader load:@"Missile"];
@@ -195,11 +200,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     self.position = ccp(0, 0);
     CCActionFollow *follow = [CCActionFollow actionWithTarget:missile worldBoundary:self.boundingBox];
     [_contentNode runAction:follow];}
-
-- (void)retry {
-    // reload this level
-    [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
-}
 
 - (void)missileRemoved:(CCNode *)missile {
     // load particle effect
@@ -294,4 +294,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self runAction:bounce];
     }
 }
+
+//- (void)retry {
+//    // reload this level
+//    [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
+//}
+
+
 @end
