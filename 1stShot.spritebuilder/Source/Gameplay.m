@@ -48,8 +48,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    CCScene *level = [CCBReader loadAsScene:@"Levels/Level1"];
-    [_levelNode addChild:level];
+//    CCScene *level = [CCBReader loadAsScene:@"Levels/Level1"];
+//    [_levelNode addChild:level];
     
     _physicsNode.collisionDelegate = self;
     
@@ -89,14 +89,31 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 -(void)screenWasSwipedUp
 {
+    if(_hero.position.y < 420)
+    {
+    if(_hero.position.y == 100 ||
+       _hero.position.y == 180 ||
+       _hero.position.y == 260 ||
+       _hero.position.y == 340 ||
+       _hero.position.y == 420)
+    {
     _swiped = 0.5f;
     _newHeroPosition = _hero.position.y;
+    }
+    }
 }
 
 -(void)screenWasSwipedDown
 {
-    _swiped = -0.5f;
-    _newHeroPosition = _hero.position.y;
+    if(_hero.position.y == 100 ||
+       _hero.position.y == 180 ||
+       _hero.position.y == 260 ||
+       _hero.position.y == 340 ||
+       _hero.position.y == 420)
+    {
+        _swiped = -0.5f;
+        _newHeroPosition = _hero.position.y;
+    }
 }
 
 - (void)update:(CCTime)delta
@@ -114,7 +131,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         {
             _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
         }
-//        CCLOG(@"%f",_hero.position.y);
+        CCLOG(@"%f",_hero.position.y);
     _physicsNode.position = ccp(_physicsNode.position.x - (_scrollSpeed *delta), _physicsNode.position.y);
     // loop the ground
     for (CCNode *ground in _grounds) {
@@ -164,14 +181,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // loads the Missile.ccb we have set up in Spritebuilder
     CCNode* missile = [CCBReader load:@"Missile"];
     // position the missile at the bottom of hero
-    missile.position = ccpAdd(_hero.position, ccp(-10, -15));
+    missile.position = ccpAdd(_hero.position, ccp(80, -15));
     
     // add the missile to the physicsNode of this scene (because it has physics enabled)
     [_physicsNode addChild:missile];
     
     // manually create & apply a force to launch the missile
     CGPoint launchDirection = ccp(1, 0);
-    CGPoint force = ccpMult(launchDirection, 30000);
+    CGPoint force = ccpMult(launchDirection, 20000);
     [missile.physicsBody applyForce:force];
     
     // ensure followed object is in visible are when starting
@@ -182,17 +199,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)retry {
     // reload this level
     [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
-}
-
--(void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile level:(CCNode *)level
-{
-    float energy = [pair totalKineticEnergy];
-    
-    // if energy is large enough, remove the missile
-    if (energy > 2000.f)
-    {
-        [self missileRemoved:missile];
-    }
 }
 
 - (void)missileRemoved:(CCNode *)missile {
@@ -236,6 +242,24 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [_obstacles addObject:obstacle];
     // fixing drawing order. drawing grounds in front of pipes.
     obstacle.zOrder = DrawingOrderPipes;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile target:(CCNode *)target {
+    [target removeFromParent];
+    [self missileRemoved:missile];
+    return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile level:(CCNode *)level {
+    [self missileRemoved:missile];
+    return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero target:(CCNode *)target {
+    [target removeFromParent];
+    [self heroRemoved:hero];
+    [self gameOver];
+    return TRUE;
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero level:(CCNode *)level {
