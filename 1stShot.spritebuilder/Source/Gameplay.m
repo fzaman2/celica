@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     BOOL _gameOver;
     CGFloat _scrollSpeed;
     CGFloat _elapsedTime;
-    NSInteger _points;
+    NSInteger _points,_prevPoint;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_label;
     CGFloat _swiped;
@@ -71,6 +71,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _hero.zOrder = DrawingOrdeHero;
     
     _scrollSpeed = 100.f;
+    _prevPoint = 1;
     
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedUp)];
     swipeUp.numberOfTouchesRequired = 1;
@@ -133,6 +134,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)update:(CCTime)delta
 {
     if(!_gameOver){
+        if(_points == _prevPoint)
+        {
+            _scrollSpeed = 100.f + _points;
+            _prevPoint++;
+        }
         if (_hero.position.y - _newHeroPosition >= 80.0)
         {
             _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
@@ -186,7 +192,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // loads the Missile.ccb we have set up in Spritebuilder
     CCNode* missile = [CCBReader load:@"Missile"];
     // position the missile at the bottom of hero
-    missile.position = ccpAdd(_hero.position, ccp(60, -15));
+    missile.position = ccpAdd(_hero.position, ccp(80, -15));
     
     // add the missile to the physicsNode of this scene (because it has physics enabled)
     [_physicsNode addChild:missile];
