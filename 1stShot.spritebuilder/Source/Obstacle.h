@@ -10,4 +10,5 @@
 
 @interface Obstacle : CCNode
 - (void)setupRandomPosition;
+- (void)setupRandomTarget;
 @end

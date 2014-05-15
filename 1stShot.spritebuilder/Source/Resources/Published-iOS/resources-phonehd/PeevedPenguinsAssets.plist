@@ -95,6 +95,19 @@
 			<key>sourceSize</key>
 			<string>{84, 355}</string>
 		</dict>
+		<key>PeevedPenguinsAssets/crate.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1781}, {128, 129}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {128, 129}}</string>
+			<key>sourceSize</key>
+			<string>{128, 129}</string>
+		</dict>
 		<key>PeevedPenguinsAssets/flyingpenguin.png</key>
 		<dict>
 			<key>frame</key>

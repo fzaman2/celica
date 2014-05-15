@@ -238,6 +238,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     Obstacle *obstacle = (Obstacle *)[CCBReader load:@"Obstacle"];
     obstacle.position = ccp(previousObstacleXPosition + distanceBetweenObstacles, 0);
     [obstacle setupRandomPosition];
+    [obstacle setupRandomTarget];
     [_physicsNode addChild:obstacle];
     [_obstacles addObject:obstacle];
     // fixing drawing order. drawing grounds in front of pipes.
