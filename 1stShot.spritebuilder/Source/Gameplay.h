@@ -10,6 +10,7 @@
 
 @interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate>
 
+@property NSInteger highScore;
 
 -(void)screenWasSwipedUp;
 -(void)screenWasSwipedDown;

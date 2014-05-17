@@ -33,14 +33,18 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSTimeInterval _sinceTouch;
     NSMutableArray *_obstacles;
     CCButton *_restartButton;
+    CCButton *_resetScoreButton;
     BOOL _gameOver;
     CGFloat _scrollSpeed;
     CGFloat _elapsedTime;
     NSInteger _points,_prevPoint;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_label;
+    CCLabelTTF *_scoreText;
+    CCLabelTTF *_scoreValue;
     CGFloat _swiped;
     CGFloat _newHeroPosition;
+//    NSInteger _highScore;
 }
 
 // is called when CCB file has completed loading
@@ -93,6 +97,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [[[CCDirector sharedDirector] view] addGestureRecognizer:tapped];
     
     _newHeroPosition = _hero.position.y;
+    
+    _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
+
 }
 
 -(void)screenWasSwipedUp
@@ -293,19 +300,37 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _scrollSpeed = 0.f;
         _gameOver = TRUE;
         _restartButton.visible = TRUE;
+        _resetScoreButton.visible = TRUE;
+        _scoreText.visible = TRUE;
+        _scoreValue.visible = TRUE;
         [_hero stopAllActions];
         CCActionMoveBy *moveBy = [CCActionMoveBy actionWithDuration:0.2f position:ccp(-2, 2)];
         CCActionInterval *reverseMovement = [moveBy reverse];
         CCActionSequence *shakeSequence = [CCActionSequence actionWithArray:@[moveBy, reverseMovement]];
         CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:shakeSequence];
+
+        // save high score
+        //To save the score (in this case, 10000 ) to standard defaults:
+        
+        if(_points > _highScore)
+        {
+        
+            [[NSUserDefaults standardUserDefaults] setInteger: _points forKey: @"highScore"];
+        
+            // To read it back:
+        
+        }
+        _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
+        _scoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
         [self runAction:bounce];
     }
 }
 
-//- (void)retry {
-//    // reload this level
-//    [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
-//}
+-(void)resetHighScore{
+    [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"highScore"];
+    _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
+    _scoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
+}
 
 
 @end
