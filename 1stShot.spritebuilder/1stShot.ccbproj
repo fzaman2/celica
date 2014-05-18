@@ -177,6 +177,19 @@
 			<key>tabletScale</key>
 			<integer>1</integer>
 		</dict>
+		<key>jet-sound.wav</key>
+		<dict>
+			<key>format_android_sound</key>
+			<integer>0</integer>
+			<key>format_android_sound_quality</key>
+			<integer>0</integer>
+			<key>format_ios_sound</key>
+			<integer>0</integer>
+			<key>format_ios_sound_quality</key>
+			<integer>0</integer>
+			<key>isDirty</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>versionStr</key>
 	<string>Version: 1.0.6

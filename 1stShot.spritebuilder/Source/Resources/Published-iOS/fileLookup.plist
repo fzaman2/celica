@@ -3,7 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>filenames</key>
-	<dict/>
+	<dict>
+		<key>deploying-whizz-whoosh.wav</key>
+		<string>deploying-whizz-whoosh.caf</string>
+		<key>explosion.wav</key>
+		<string>explosion.caf</string>
+		<key>jet-sound-old1.wav</key>
+		<string>jet-sound-old1.caf</string>
+		<key>jet-sound.wav</key>
+		<string>jet-sound.caf</string>
+	</dict>
 	<key>metadata</key>
 	<dict>
 		<key>version</key>
