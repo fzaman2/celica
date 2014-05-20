@@ -422,20 +422,20 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>4.4730892181396484</real>
-							<real>17.858283996582031</real>
+							<real>10.459529876708984</real>
+							<real>108.29067230224609</real>
 						</array>
 						<array>
-							<real>5.4984798431396484</real>
-							<real>2.2142956256866455</real>
+							<real>26.879995346069336</real>
+							<real>12.334556579589844</real>
 						</array>
 						<array>
-							<real>30.354707717895508</real>
-							<real>2.455723762512207</real>
+							<real>147.74153137207031</real>
+							<real>19.328166961669922</real>
 						</array>
 						<array>
-							<real>29.478513717651367</real>
-							<real>19.550992965698242</real>
+							<real>119.25688934326172</real>
+							<real>107.93745422363281</real>
 						</array>
 					</array>
 				</dict>
@@ -470,8 +470,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>0.20000000298023224</real>
+							<real>0.20000000298023224</real>
 							<false/>
 							<integer>0</integer>
 						</array>
