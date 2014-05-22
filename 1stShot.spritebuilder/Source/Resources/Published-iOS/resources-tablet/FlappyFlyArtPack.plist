@@ -20,11 +20,11 @@
 		<key>FlappyFlyArtPack/bush.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{549, 963}, {640, 69}}</string>
+			<string>{{453, 1887}, {640, 69}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {640, 69}}</string>
 			<key>sourceSize</key>
@@ -69,6 +69,19 @@
 			<key>sourceSize</key>
 			<string>{328, 229}</string>
 		</dict>
+		<key>FlappyFlyArtPack/gameover.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{453, 1634}, {251, 173}}</string>
+			<key>offset</key>
+			<string>{0, -2}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{25, 28}, {251, 173}}</string>
+			<key>sourceSize</key>
+			<string>{300, 225}</string>
+		</dict>
 		<key>FlappyFlyArtPack/ground.png</key>
 		<dict>
 			<key>frame</key>
@@ -98,11 +111,11 @@
 		<key>FlappyFlyArtPack/pipe_top.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{453, 1634}, {101, 669}}</string>
+			<string>{{549, 963}, {101, 669}}</string>
 			<key>offset</key>
 			<string>{0, 1}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{3, 0}, {101, 669}}</string>
 			<key>sourceSize</key>
