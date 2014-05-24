@@ -77,6 +77,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _scrollSpeed = 100.f;
     _prevPoint = 1;
     
+    // GestureRecognizer Code
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedUp)];
     swipeUp.numberOfTouchesRequired = 1;
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
@@ -100,23 +101,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
     
-    // iAd Code
-    // On iOS 6 ADBannerView introduces a new initializer, use it when available.
-//    if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
-//        _bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-//        
-//    } else {
-//        _bannerView = [[ADBannerView alloc] init];
-//    }
-//    _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
-//    _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-//    [[[CCDirector sharedDirector]view]addSubview:_bannerView];
-//    [_bannerView setBackgroundColor:[UIColor clearColor]];
-//    [[[CCDirector sharedDirector]view]addSubview:_bannerView];
-//    _bannerView.delegate = self;
-//    [self layoutAnimated:NO];
-//    [_bannerView setAlpha:0];
-
 }
 
 
@@ -347,7 +331,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 
 - (void)restart {
-    CCScene *scene = [CCBReader loadAsScene:@"Gameplay"];
+    CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:scene];
     [self layoutAnimated:NO];
     _bannerView.hidden = YES;
