@@ -7,8 +7,13 @@
 //
 
 #import "CCNode.h"
+#import <iAd/iAd.h>
 
-@interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate>
+#ifndef IADHELPER_LOGGING
+#define IADHELPER_LOGGING 0
+#endif
+
+@interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate, ADBannerViewDelegate>
 
 @property NSInteger highScore;
 

@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCNode *_gameOverBox;
     CCLabelTTF *_highScoreValue;
     CCLabelTTF *_scoreValue;
+    ADBannerView *_bannerView;
 }
 
 // is called when CCB file has completed loading
@@ -98,7 +99,63 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _newHeroPosition = _hero.position.y;
     
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
+    
+    // iAd Code
+    // On iOS 6 ADBannerView introduces a new initializer, use it when available.
+//    if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
+//        _bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
+//        
+//    } else {
+//        _bannerView = [[ADBannerView alloc] init];
+//    }
+//    _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
+//    _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+//    [[[CCDirector sharedDirector]view]addSubview:_bannerView];
+//    [_bannerView setBackgroundColor:[UIColor clearColor]];
+//    [[[CCDirector sharedDirector]view]addSubview:_bannerView];
+//    _bannerView.delegate = self;
+//    [self layoutAnimated:NO];
+//    [_bannerView setAlpha:0];
 
+}
+
+
+
+-(id) init
+{
+    if( (self= [super init]) )
+    {
+        if(_bannerView == nil)
+        {
+        // On iOS 6 ADBannerView introduces a new initializer, use it when available.
+        if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
+            _bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
+            
+        } else {
+            _bannerView = [[ADBannerView alloc] init];
+        }
+        
+        CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
+        if (contentFrame.size.width < contentFrame.size.height) {
+            _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        } else {
+            _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierLandscape];
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        }
+        
+        [[[CCDirector sharedDirector]view]addSubview:_bannerView];
+        [_bannerView setBackgroundColor:[UIColor clearColor]];
+        [[[CCDirector sharedDirector]view]addSubview:_bannerView];
+        _bannerView.delegate = self;
+        _bannerView.hidden = YES;
+        }
+    }
+    [[[CCDirector sharedDirector]view]bringSubviewToFront:_bannerView];
+    
+    [self layoutAnimated:YES];
+    return self;
+    
 }
 
 -(void)screenWasSwipedUp
@@ -292,6 +349,18 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)restart {
     CCScene *scene = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:scene];
+    [self layoutAnimated:NO];
+    _bannerView.hidden = YES;
+//    [_bannerView setAlpha:0];
+}
+
+-(void)onExit
+{
+    [self stopAllActions];
+    [self unscheduleAllSelectors];
+    [self removeAllChildrenWithCleanup:YES];
+    [_bannerView removeFromSuperview];
+    [super onExit];
 }
 
 - (void)gameOver {
@@ -322,6 +391,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
         _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
         _highScoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
+        [self layoutAnimated:YES];
+//        [_bannerView setAlpha:1];
+        _bannerView.hidden = NO;
         [self runAction:bounce];
     }
 }
@@ -332,5 +404,58 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _highScoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
 }
 
+#pragma mark iAd Delegate Methods
+
+//-(void)bannerViewDidLoadAd:(ADBannerView *)banner
+//{
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:1];
+//    [banner setAlpha:1];
+//    [UIView commitAnimations];
+//}
+//
+//-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+//{
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:1];
+//    [banner setAlpha:0];
+//    [UIView commitAnimations];
+//}
+
+- (void)layoutAnimated:(BOOL)animated
+{
+    // As of iOS 6.0, the banner will automatically resize itself based on its width.
+    // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
+    CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
+    
+    if (contentFrame.size.width < contentFrame.size.height) {
+        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    } else {
+        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+    }
+    
+    
+    CGRect bannerFrame = _bannerView.frame;
+    if (_bannerView.bannerLoaded) {
+        contentFrame.size.height -= _bannerView.frame.size.height;
+        bannerFrame.origin.y = contentFrame.size.height;
+    } else {
+        bannerFrame.origin.y = contentFrame.size.height;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        _bannerView.frame = bannerFrame;
+    }];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+//    CCLOG(@"Successfully loaded banner");
+    [self layoutAnimated:YES];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+//    CCLOG(@"Failed to load banner with error: %@ ",error);
+    [self layoutAnimated:NO];
+}
 
 @end
