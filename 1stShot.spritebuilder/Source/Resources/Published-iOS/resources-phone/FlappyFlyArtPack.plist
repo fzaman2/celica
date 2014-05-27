@@ -7,20 +7,20 @@
 		<key>FlappyFlyArtPack/background.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 1}, {320, 480}}</string>
+			<string>{{1, 1}, {320, 490}}</string>
 			<key>offset</key>
-			<string>{0, 0}</string>
+			<string>{0, 5}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0, 0}, {320, 480}}</string>
+			<string>{{0, 0}, {320, 490}}</string>
 			<key>sourceSize</key>
-			<string>{320, 480}</string>
+			<string>{320, 500}</string>
 		</dict>
 		<key>FlappyFlyArtPack/bush.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{229, 948}, {320, 34}}</string>
+			<string>{{318, 830}, {320, 34}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -33,7 +33,7 @@
 		<key>FlappyFlyArtPack/clouds.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 483}, {374, 66}}</string>
+			<string>{{1, 493}, {374, 66}}</string>
 			<key>offset</key>
 			<string>{0, -2}</string>
 			<key>rotated</key>
@@ -46,7 +46,7 @@
 		<key>FlappyFlyArtPack/fly1.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 859}, {164, 114}}</string>
+			<string>{{90, 843}, {164, 114}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -59,7 +59,7 @@
 		<key>FlappyFlyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{117, 833}, {162, 110}}</string>
+			<string>{{206, 843}, {162, 110}}</string>
 			<key>offset</key>
 			<string>{1, 2}</string>
 			<key>rotated</key>
@@ -72,7 +72,7 @@
 		<key>FlappyFlyArtPack/gameover.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{229, 820}, {126, 87}}</string>
+			<string>{{1, 869}, {126, 87}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -85,7 +85,7 @@
 		<key>FlappyFlyArtPack/ground.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{69, 483}, {348, 155}}</string>
+			<string>{{69, 493}, {348, 155}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -98,7 +98,7 @@
 		<key>FlappyFlyArtPack/pipe_bottom.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{226, 483}, {51, 335}}</string>
+			<string>{{226, 493}, {51, 335}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -111,7 +111,7 @@
 		<key>FlappyFlyArtPack/pipe_top.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{279, 483}, {51, 335}}</string>
+			<string>{{279, 493}, {51, 335}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>

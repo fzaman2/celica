@@ -10,7 +10,7 @@
 @implementation Obstacle {
     CCNode *_topPipe;
     CCNode *_bottomPipe;
-    CCNode *_target, *_target2;
+    CCNode *_target, *_target2, *_target3;
     int _random,_random2;
     int _yPosition;
     BOOL _goTime;
@@ -44,7 +44,8 @@ static const CGFloat scrollSpeed = 1.f;
     }
     _topPipe.position = ccp(_topPipe.position.x, _yPosition);
     _target.position = ccp(_target.position.x,_topPipe.position.y + pipeDistance/2);
-    _target2.position = ccp(_target2.position.x,_topPipe.position.y + pipeDistance/2);
+    _target2.position = ccp(_target2.position.x,_topPipe.position.y + pipeDistance/1.25);
+    _target3.position = ccp(_target3.position.x,_topPipe.position.y + pipeDistance/2.85);
     _bottomPipe.position = ccp(_bottomPipe.position.x, _topPipe.position.y + pipeDistance);
 //    CCLOG(@"%f",_bottomPipe.position.x);
 //    CCLOG(@"%f",_topPipe.position.y);
@@ -60,6 +61,8 @@ static const CGFloat scrollSpeed = 1.f;
     _target.physicsBody.sensor = TRUE;
     _target2.physicsBody.collisionType = @"target";
     _target2.physicsBody.sensor = TRUE;
+   _target3.physicsBody.collisionType = @"target";
+   _target3.physicsBody.sensor = TRUE;
 }
 
 -(void)update:(CCTime)delta
@@ -82,15 +85,23 @@ static const CGFloat scrollSpeed = 1.f;
     {
         case 0:
             [_target2 removeFromParent];
+            [_target3 removeFromParent];
+//          [_target removeFromParent];
             break;
         case 1:
             [_target2 removeFromParent];
+          [_target3 removeFromParent];
+//          [_target removeFromParent];
             break;
         case 2:
             [_target2 removeFromParent];
+          [_target3 removeFromParent];
+//          [_target removeFromParent];
             break;
         case 3:
             [_target2 removeFromParent];
+          [_target3 removeFromParent];
+//          [_target removeFromParent];
             break;
         case 4:
             [_target removeFromParent];
