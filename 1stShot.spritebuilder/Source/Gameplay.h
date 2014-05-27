@@ -15,7 +15,7 @@
 #endif
 
 @interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate, ADBannerViewDelegate,
-ADInterstitialAdDelegate>
+GADInterstitialDelegate>
 {
 }
 

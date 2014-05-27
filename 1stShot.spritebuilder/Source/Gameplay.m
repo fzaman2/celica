@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCLabelTTF *_highScoreValue;
     CCLabelTTF *_scoreValue;
     ADBannerView *_bannerView;
-    ADInterstitialAd *interstitial;
+    GADInterstitial *interstitial;
 
 }
 
@@ -452,20 +452,19 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 {
     // Clean up the old interstitial...
     interstitial.delegate = nil;
-    interstitial = nil;
-    // and create a new interstitial. We set the delegate so that we can be notified of when
-    interstitial = [[ADInterstitialAd alloc] init];
-    interstitial.delegate = self;
-    NSLog(@"cycleInterstitial");
+    interstitial = nil;   
+   // GAD
+   interstitial = [[GADInterstitial alloc] init];
+   interstitial.adUnitID = @"ca-app-pub-3129568560891761/5903024736";
+   [interstitial loadRequest:[GADRequest request]];
+   interstitial.delegate = self;
 }
 
 - (void)presentInterlude
 {
    // If the interstitial managed to load, then we'll present it now.
-   if (interstitial.loaded) {
-      //        [interstitial presentInView:[[CCDirector sharedDirector]view]];
-      [CCDirector sharedDirector].interstitialPresentationPolicy = ADInterstitialPresentationPolicyManual;
-      [[CCDirector sharedDirector] requestInterstitialAdPresentation];
+   if (interstitial.isReady) {
+      [interstitial presentFromRootViewController:[CCDirector sharedDirector]];
    }
    CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
    [[CCDirector sharedDirector] replaceScene:scene];
@@ -479,25 +478,16 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 // The content will be unloaded shortly after this method is called and no new content will be loaded in that view.
 // This may occur either when the user dismisses the interstitial view via the dismiss button or
 // if the content in the view has expired.
-- (void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
+- (void)interstitialAdDidUnload:(GADInterstitial *)interstitialAd
 {
     [self cycleInterstitial];
-    NSLog(@"interstitialAdDidUnload");
 }
 
 // This method will be invoked when an error has occurred attempting to get advertisement content.
 // The ADError enum lists the possible error codes.
-- (void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
+- (void)interstitialAd:(GADInterstitial *)interstitialAd didFailWithError:(NSError *)error
 {
     [self cycleInterstitial];
-    NSLog(@"interstitialAd didFailWithERROR");
 }
-
-//
-//-(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd {
-//    [self cycleInterstitial];
-//    NSLog(@"interstitialAdDidFINISH");
-//}
-//
 
 @end
