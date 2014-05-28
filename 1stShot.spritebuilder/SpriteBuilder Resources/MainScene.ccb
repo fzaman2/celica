@@ -55,7 +55,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>20</real>
+							<real>0.0</real>
 							<integer>1</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -110,6 +110,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -636,8 +638,6 @@
 						<string>Hero.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

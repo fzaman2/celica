@@ -58,20 +58,20 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>-0.4723835289478302</real>
+							<real>390.5538330078125</real>
 						</array>
 						<array>
 							<real>0.0</real>
-							<real>336</real>
-						</array>
-						<array>
-							<real>53</real>
-							<real>336</real>
+							<real>0.0</real>
 						</array>
 						<array>
 							<real>53</real>
 							<real>0.0</real>
+						</array>
+						<array>
+							<real>52.657596588134766</real>
+							<real>390.73016357421875</real>
 						</array>
 					</array>
 				</dict>
@@ -148,6 +148,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -183,20 +185,20 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>-0.98100990056991577</real>
+							<real>388.50909423828125</real>
 						</array>
 						<array>
 							<real>0.0</real>
-							<real>336</real>
-						</array>
-						<array>
-							<real>53</real>
-							<real>336</real>
+							<real>0.0</real>
 						</array>
 						<array>
 							<real>53</real>
 							<real>0.0</real>
+						</array>
+						<array>
+							<real>53.586685180664062</real>
+							<real>388.131591796875</real>
 						</array>
 					</array>
 				</dict>
@@ -735,8 +737,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
