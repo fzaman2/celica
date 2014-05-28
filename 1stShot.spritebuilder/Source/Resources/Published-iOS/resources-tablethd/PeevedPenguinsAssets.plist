@@ -7,7 +7,7 @@
 		<key>PeevedPenguinsAssets/Airspeed_indicator.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{2932, 1283}, {476, 476}}</string>
+			<string>{{2938, 1283}, {476, 476}}</string>
 			<key>offset</key>
 			<string>{-1, 2}</string>
 			<key>rotated</key>
@@ -46,7 +46,7 @@
 		<key>PeevedPenguinsAssets/bear.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{3410, 1283}, {322, 312}}</string>
+			<string>{{3416, 1283}, {322, 312}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -72,7 +72,7 @@
 		<key>PeevedPenguinsAssets/bearnoarms.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{3410, 1597}, {322, 312}}</string>
+			<string>{{3416, 1597}, {322, 312}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -98,7 +98,7 @@
 		<key>PeevedPenguinsAssets/catapult.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{2070, 1283}, {860, 320}}</string>
+			<string>{{2076, 1283}, {860, 320}}</string>
 			<key>offset</key>
 			<string>{0, -25}</string>
 			<key>rotated</key>
@@ -176,13 +176,13 @@
 		<key>PeevedPenguinsAssets/jet2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1661, 3843}, {407, 108}}</string>
+			<string>{{1661, 3843}, {413, 108}}</string>
 			<key>offset</key>
-			<string>{6, 0}</string>
+			<string>{3, 0}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{26, 17}, {407, 108}}</string>
+			<string>{{20, 17}, {413, 108}}</string>
 			<key>sourceSize</key>
 			<string>{446, 142}</string>
 		</dict>

@@ -7,7 +7,7 @@
 		<key>PeevedPenguinsAssets/Airspeed_indicator.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 891}, {119, 119}}</string>
+			<string>{{323, 386}, {119, 119}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -46,11 +46,11 @@
 		<key>PeevedPenguinsAssets/bear.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 424}, {80, 78}}</string>
+			<string>{{323, 893}, {80, 78}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {80, 78}}</string>
 			<key>sourceSize</key>
@@ -72,7 +72,7 @@
 		<key>PeevedPenguinsAssets/bearnoarms.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{444, 891}, {80, 78}}</string>
+			<string>{{403, 893}, {80, 78}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -85,7 +85,7 @@
 		<key>PeevedPenguinsAssets/button.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 722}, {167, 152}}</string>
+			<string>{{323, 724}, {167, 152}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -98,7 +98,7 @@
 		<key>PeevedPenguinsAssets/catapult.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 505}, {215, 79}}</string>
+			<string>{{323, 507}, {215, 79}}</string>
 			<key>offset</key>
 			<string>{0, -6}</string>
 			<key>rotated</key>
@@ -124,7 +124,7 @@
 		<key>PeevedPenguinsAssets/crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{404, 505}, {64, 64}}</string>
+			<string>{{404, 507}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -176,13 +176,13 @@
 		<key>PeevedPenguinsAssets/jet2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{992, 402}, {101, 27}}</string>
+			<string>{{992, 402}, {103, 27}}</string>
 			<key>offset</key>
-			<string>{2, 0}</string>
+			<string>{1, 0}</string>
 			<key>rotated</key>
 			<true/>
 			<key>sourceColorRect</key>
-			<string>{{7, 4}, {101, 27}}</string>
+			<string>{{5, 4}, {103, 27}}</string>
 			<key>sourceSize</key>
 			<string>{111, 35}</string>
 		</dict>
