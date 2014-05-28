@@ -46,7 +46,7 @@
 		<key>FlappyFlyArtPack/fly1.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{176, 1765}, {328, 228}}</string>
+			<string>{{1, 1779}, {328, 228}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -59,11 +59,11 @@
 		<key>FlappyFlyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{506, 1706}, {324, 220}}</string>
+			<string>{{331, 1758}, {324, 220}}</string>
 			<key>offset</key>
 			<string>{2, 4}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{4, 0}, {324, 220}}</string>
 			<key>sourceSize</key>
@@ -72,15 +72,15 @@
 		<key>FlappyFlyArtPack/gameover.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 1779}, {251, 173}}</string>
+			<string>{{643, 643}, {438, 321}}</string>
 			<key>offset</key>
-			<string>{0, -2}</string>
+			<string>{-1, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
-			<string>{{25, 28}, {251, 173}}</string>
+			<string>{{5, 8}, {438, 321}}</string>
 			<key>sourceSize</key>
-			<string>{300, 225}</string>
+			<string>{450, 337}</string>
 		</dict>
 		<key>FlappyFlyArtPack/ground.png</key>
 		<dict>
