@@ -9,7 +9,7 @@
 #import "Gameplay.h"
 #import "Obstacle.h"
 
-//static const CGFloat scrollSpeed = 100.f;
+static const CGFloat scrollSpeedRate = 200.f;
 static const CGFloat yAccelSpeed = 10.f;
 static const CGFloat firstObstaclePosition = 280.f;
 static const CGFloat distanceBetweenObstacles = 320.f;
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _hero.physicsBody.collisionType = @"hero";
     _hero.zOrder = DrawingOrdeHero;
     
-    _scrollSpeed = 100.f;
+    _scrollSpeed = scrollSpeedRate;
     _prevPoint = 1;
     
     // GestureRecognizer Code
@@ -185,7 +185,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if(!_gameOver){
         if(_points == _prevPoint)
         {
-            _scrollSpeed = 100.f + _points;
+            _scrollSpeed = scrollSpeedRate + _points;
             _prevPoint++;
         }
         if (_hero.position.y - _newHeroPosition >= 80.0)
@@ -478,16 +478,21 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 // The content will be unloaded shortly after this method is called and no new content will be loaded in that view.
 // This may occur either when the user dismisses the interstitial view via the dismiss button or
 // if the content in the view has expired.
-- (void)interstitialAdDidUnload:(GADInterstitial *)interstitialAd
-{
-    [self cycleInterstitial];
-}
+//- (void)interstitialAdDidUnload:(GADInterstitial *)interstitialAd
+//{
+//    [self cycleInterstitial];
+//}
 
 // This method will be invoked when an error has occurred attempting to get advertisement content.
 // The ADError enum lists the possible error codes.
-- (void)interstitialAd:(GADInterstitial *)interstitialAd didFailWithError:(NSError *)error
+-(void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    [self cycleInterstitial];
+   [self cycleInterstitial];
+}
+
+-(void)interstitialDidDismissScreen:(GADInterstitial *)ad
+{
+   [self cycleInterstitial];
 }
 
 @end
