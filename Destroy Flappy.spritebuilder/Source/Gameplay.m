@@ -258,7 +258,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)missileRemoved:(CCNode *)missile {
     // load particle effect
-    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
     // make the particle effect clean itself up, once it is completed
     explosion.autoRemoveOnFinish = TRUE;
     // place the particle effect on the missiles position
@@ -271,7 +271,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 - (void)heroRemoved:(CCNode *)hero {
     // load particle effect
-    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
     // make the particle effect clean itself up, once it is completed
     explosion.autoRemoveOnFinish = TRUE;
     // place the particle effect on the hero position

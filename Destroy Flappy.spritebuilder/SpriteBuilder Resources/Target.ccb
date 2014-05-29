@@ -42,7 +42,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly1.png</string>
+								<string>DestroyFlappyArtPack/fly1.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -60,7 +60,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly2.png</string>
+								<string>DestroyFlappyArtPack/fly2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -78,7 +78,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly1.png</string>
+								<string>DestroyFlappyArtPack/fly1.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -96,7 +96,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly2.png</string>
+								<string>DestroyFlappyArtPack/fly2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -114,7 +114,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly1.png</string>
+								<string>DestroyFlappyArtPack/fly1.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -132,7 +132,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>FlappyFlyArtPack/fly2.png</string>
+								<string>DestroyFlappyArtPack/fly2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -217,7 +217,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>FlappyFlyArtPack/fly2.png</string>
+					<string>DestroyFlappyArtPack/fly2.png</string>
 				</array>
 			</dict>
 			<dict>

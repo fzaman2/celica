@@ -18,7 +18,7 @@
 }
 // distance between top and bottom pipe
 static const CGFloat pipeDistance = 100.f;
-static const CGFloat scrollSpeed = 1.f;
+//static const CGFloat scrollSpeed = 1.f;
 
 - (void)setupRandomPosition {
     _random = arc4random() % 4;
@@ -67,7 +67,7 @@ static const CGFloat scrollSpeed = 1.f;
     if(_goTime)
     {
         _elapsedTime += delta;
-        if(_elapsedTime > 2.5)
+        if(_elapsedTime > 0.5)
         {
             _target.position = ccp(_target.position.x + delta/2, _target.position.y + delta/2);
 //            CCLOG(@"%f",_target.position.y);

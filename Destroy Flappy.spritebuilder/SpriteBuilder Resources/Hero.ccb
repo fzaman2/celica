@@ -42,7 +42,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet2.png</string>
+								<string>DestroyFlappyArtPack/jet2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -60,7 +60,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet.png</string>
+								<string>DestroyFlappyArtPack/jet.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -78,7 +78,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet2.png</string>
+								<string>DestroyFlappyArtPack/jet2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -96,7 +96,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet.png</string>
+								<string>DestroyFlappyArtPack/jet.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -114,7 +114,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet2.png</string>
+								<string>DestroyFlappyArtPack/jet2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -132,7 +132,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>PeevedPenguinsAssets/jet.png</string>
+								<string>DestroyFlappyArtPack/jet.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -217,7 +217,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>PeevedPenguinsAssets/jet.png</string>
+					<string>DestroyFlappyArtPack/jet.png</string>
 				</array>
 			</dict>
 			<dict>

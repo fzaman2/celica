@@ -88,15 +88,10 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
-		<key>FlappyFlyArtPack</key>
+		<key>DestroyFlappyArtPack</key>
 		<dict>
 			<key>isDirty</key>
 			<true/>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-		</dict>
-		<key>PeevedPenguinsAssets</key>
-		<dict>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 		</dict>

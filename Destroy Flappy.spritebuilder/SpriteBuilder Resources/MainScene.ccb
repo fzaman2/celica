@@ -93,7 +93,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FlappyFlyArtPack/background.png</string>
+							<string>DestroyFlappyArtPack/background.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -110,8 +110,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -182,7 +180,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FlappyFlyArtPack/clouds.png</string>
+							<string>DestroyFlappyArtPack/clouds.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -269,7 +267,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FlappyFlyArtPack/bush.png</string>
+							<string>DestroyFlappyArtPack/bush.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -356,7 +354,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>FlappyFlyArtPack/ground.png</string>
+							<string>DestroyFlappyArtPack/ground.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -638,6 +636,8 @@
 						<string>Hero.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
