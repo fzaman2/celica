@@ -241,7 +241,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // loads the Missile.ccb we have set up in Spritebuilder
     CCNode* missile = [CCBReader load:@"Missile"];
     // position the missile at the bottom of hero
-    missile.position = ccpAdd(_hero.position, ccp(80, -15));
+    missile.position = ccpAdd(_hero.position, ccp(60, -15));
     
     // add the missile to the physicsNode of this scene (because it has physics enabled)
     [_physicsNode addChild:missile];

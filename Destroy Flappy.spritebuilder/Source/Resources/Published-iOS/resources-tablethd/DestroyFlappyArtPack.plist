@@ -163,15 +163,15 @@
 		<key>DestroyFlappyArtPack/missile.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{679, 3408}, {258, 74}}</string>
+			<string>{{679, 3408}, {209, 68}}</string>
 			<key>offset</key>
-			<string>{0, 1}</string>
+			<string>{1, 0}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0, 0}, {258, 74}}</string>
+			<string>{{3, 0}, {209, 68}}</string>
 			<key>sourceSize</key>
-			<string>{258, 76}</string>
+			<string>{212, 68}</string>
 		</dict>
 		<key>DestroyFlappyArtPack/pipe_bottom.png</key>
 		<dict>
