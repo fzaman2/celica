@@ -208,7 +208,7 @@
 			<key>soundChannel</key>
 			<dict>
 				<key>isExpanded</key>
-				<false/>
+				<true/>
 				<key>keyframes</key>
 				<array>
 					<dict>
@@ -223,7 +223,7 @@
 						<integer>11</integer>
 						<key>value</key>
 						<array>
-							<string>bullet-impact-1.wav</string>
+							<string>fuzzsound-bullet.wav</string>
 							<real>1</real>
 							<real>0.0</real>
 							<real>1</real>
