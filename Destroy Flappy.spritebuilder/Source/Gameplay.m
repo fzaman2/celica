@@ -121,15 +121,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
             _bannerView = [[ADBannerView alloc] init];
         }
         
-        CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
-        if (contentFrame.size.width < contentFrame.size.height) {
-            _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
-            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-        } else {
-            _bannerView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierLandscape];
-            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        }
-        
+        [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [[[CCDirector sharedDirector]view]addSubview:_bannerView];
         [_bannerView setBackgroundColor:[UIColor clearColor]];
         [[[CCDirector sharedDirector]view]addSubview:_bannerView];
@@ -461,13 +453,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
     CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
     
-    if (contentFrame.size.width < contentFrame.size.height) {
-        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-    } else {
-        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    }
-    
-    
+   [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+   
     CGRect bannerFrame = _bannerView.frame;
     if (_bannerView.bannerLoaded) {
         contentFrame.size.height -= _bannerView.frame.size.height;
