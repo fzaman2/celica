@@ -453,6 +453,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
     CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
     
+   // New line of code. Old code was depracted in ios 6
    [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
    
     CGRect bannerFrame = _bannerView.frame;
