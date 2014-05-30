@@ -43,6 +43,19 @@
 			<key>sourceSize</key>
 			<string>{320, 525}</string>
 		</dict>
+		<key>DestroyFlappyArtPack/bullet.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1014}, {13, 6}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {13, 6}}</string>
+			<key>sourceSize</key>
+			<string>{13, 6}</string>
+		</dict>
 		<key>DestroyFlappyArtPack/bush.png</key>
 		<dict>
 			<key>frame</key>

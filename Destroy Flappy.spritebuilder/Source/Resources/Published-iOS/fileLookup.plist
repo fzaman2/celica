@@ -8,6 +8,10 @@
 		<string>deploying-whizz-whoosh.caf</string>
 		<key>explosion.wav</key>
 		<string>explosion.caf</string>
+		<key>fuzzsound-bullet.wav</key>
+		<string>fuzzsound-bullet.caf</string>
+		<key>impact-9.wav</key>
+		<string>impact-9.caf</string>
 		<key>jet-sound-old1.wav</key>
 		<string>jet-sound-old1.caf</string>
 		<key>jet-sound.wav</key>

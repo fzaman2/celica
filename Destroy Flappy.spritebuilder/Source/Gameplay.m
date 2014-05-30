@@ -176,7 +176,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(void)screenTapped
 {
     if (!_gameOver) {
-        [self launchMissile];
+//        [self launchMissile];
+       [self launchBullet];
     }
 }
 
@@ -269,6 +270,40 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // finally, remove the missile
     [missile removeFromParent];
 }
+
+- (void)launchBullet {
+   // loads the Bullet.ccb we have set up in Spritebuilder
+   CCNode* bullet = [CCBReader load:@"Bullet"];
+   // position the bullet at the bottom of hero
+   bullet.position = ccpAdd(_hero.position, ccp(60, -10));
+   
+   // add the bullet to the physicsNode of this scene (because it has physics enabled)
+   [_physicsNode addChild:bullet];
+   
+   // manually create & apply a force to launch the bullet
+   CGPoint launchDirection = ccp(1, 0);
+   CGPoint force = ccpMult(launchDirection, 4000);
+   [bullet.physicsBody applyForce:force];
+   
+   // ensure followed object is in visible are when starting
+   self.position = ccp(0, 0);
+   CCActionFollow *follow = [CCActionFollow actionWithTarget:bullet worldBoundary:self.boundingBox];
+   [_contentNode runAction:follow];}
+
+- (void)bulletRemoved:(CCNode *)bullet {
+   // load particle effect
+   CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"BulletExplosion"];
+   // make the particle effect clean itself up, once it is completed
+   explosion.autoRemoveOnFinish = TRUE;
+   // place the particle effect on the missiles position
+   explosion.position = bullet.position;
+   // add the particle effect to the same node the missile is on
+   [bullet.parent addChild:explosion];
+   
+   // finally, remove the missile
+   [bullet removeFromParent];
+}
+
 - (void)heroRemoved:(CCNode *)hero {
     // load particle effect
     CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
@@ -279,7 +314,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // add the particle effect to the same node the hero is on
     [hero.parent addChild:explosion];
     
-    // finally, remove the missile
+    // finally, remove the hero
     [hero removeFromParent];
 }
 
@@ -309,6 +344,17 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile level:(CCNode *)level {
     [self missileRemoved:missile];
     return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet target:(CCNode *)target {
+   [target removeFromParent];
+   [self bulletRemoved:bullet];
+   return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet level:(CCNode *)level {
+   [self bulletRemoved:bullet];
+   return TRUE;
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero target:(CCNode *)target {

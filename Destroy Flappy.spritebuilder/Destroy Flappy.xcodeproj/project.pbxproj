@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A10C9EB193813DD00CF88D5 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9EA193813DD00CF88D5 /* Bullet.m */; };
 		3A16F910192EA72D0048C649 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F90F192EA72D0048C649 /* iAd.framework */; };
 		3AA4C9BB191F479F00FB1CF9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA4C9BA191F479F00FB1CF9 /* CoreMotion.framework */; };
 		3ABE1C3E1936D5140036632C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ABE1C3D1936D5140036632C /* Images.xcassets */; };
@@ -71,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A10C9E9193813DD00CF88D5 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = Source/Bullet.h; sourceTree = "<group>"; };
+		3A10C9EA193813DD00CF88D5 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bullet.m; path = Source/Bullet.m; sourceTree = "<group>"; };
 		3A16F90F192EA72D0048C649 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		3AA4C9BA191F479F00FB1CF9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3ABE1C3D1936D5140036632C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Destroy Flappy/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -213,6 +216,8 @@
 				B7378993180767190076A88C /* MainScene.m */,
 				C1C8EA44190B5AA4000C223E /* Gameplay.h */,
 				C1C8EA45190B5AA4000C223E /* Gameplay.m */,
+				3A10C9E9193813DD00CF88D5 /* Bullet.h */,
+				3A10C9EA193813DD00CF88D5 /* Bullet.m */,
 				C114563919148A0600089ED9 /* Goal.h */,
 				C114563A19148A0600089ED9 /* Goal.m */,
 				C11456361912EA2A00089ED9 /* Obstacle.h */,
@@ -425,6 +430,7 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				C11456381912EA2A00089ED9 /* Obstacle.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
+				3A10C9EB193813DD00CF88D5 /* Bullet.m in Sources */,
 				C1C8EA3F190B5480000C223E /* Missile.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				C1BD9E56190C6C2C00C22D50 /* Penguin.m in Sources */,
