@@ -45,7 +45,7 @@ static const CGFloat pipeDistance = 100.f;
     _target2.position = ccp(_target2.position.x,_topPipe.position.y + pipeDistance/1.25);
     _target3.position = ccp(_target3.position.x,_topPipe.position.y + pipeDistance/2.85);
     _bottomPipe.position = ccp(_bottomPipe.position.x, _topPipe.position.y + pipeDistance);
-    _bonus1.position = ccp(_bonus1.position.x,_topPipe.position.y + pipeDistance/2.85);
+    _bonus1.position = ccp(_bonus1.position.x,_topPipe.position.y + pipeDistance);
 //    CCLOG(@"%f",_bottomPipe.position.x);
 //    CCLOG(@"%f",_topPipe.position.y);
     _goTime = true;
@@ -105,11 +105,11 @@ static const CGFloat pipeDistance = 100.f;
         case 3:
             [_target2 removeFromParent];
           [_target3 removeFromParent];
-          [_bonus1 removeFromParent];
 //          [_target removeFromParent];
             break;
         case 4:
             [_target removeFromParent];
+            [_bonus1 removeFromParent];
             break;
         default:
             break;

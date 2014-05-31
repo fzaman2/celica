@@ -9,13 +9,13 @@
 #import "CCNode.h"
 #import <iAd/iAd.h>
 #import "GADInterstitial.h"
+#import <AVFoundation/AVFoundation.h>
 
 #ifndef IADHELPER_LOGGING
 #define IADHELPER_LOGGING 0
 #endif
 
-@interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate, ADBannerViewDelegate,
-GADInterstitialDelegate>
+@interface Gameplay : CCNode <CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate, ADBannerViewDelegate,GADInterstitialDelegate, AVAudioPlayerDelegate>
 {
 }
 

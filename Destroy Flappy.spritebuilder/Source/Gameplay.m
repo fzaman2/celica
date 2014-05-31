@@ -46,6 +46,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCLabelTTF *_scoreValue;
     ADBannerView *_bannerView;
     GADInterstitial *interstitial;
+    CCLabelTTF *_missileLabel;
+   NSInteger _missileCount;
+   AVAudioPlayer *player;
 
 }
 
@@ -92,7 +95,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
 
-    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
+   UISwipeGestureRecognizer *swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedRight)];
+   swipRight.numberOfTouchesRequired = 1;
+   swipRight.direction = UISwipeGestureRecognizerDirectionRight;
+   
+   [[[CCDirector sharedDirector] view] addGestureRecognizer:swipRight];
+
+   UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
     tapped.numberOfTapsRequired = 1;
     tapped.numberOfTouchesRequired = 1;
     tapped.cancelsTouchesInView = NO;
@@ -104,7 +113,30 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
     
     [self cycleInterstitial]; // Prepare our interstitial for after the game so that we can be certain its ready to present
-}
+   
+   // The AV Audio Player needs a URL to the file that will be played to be specified.
+   // So, we're going to set the audio file's path and then convert it to a URL.
+   NSString *audioFilePath = [[NSBundle mainBundle] pathForResource:@"picked-coin-echo-2" ofType:@"wav"];
+   NSURL *pathAsURL = [[NSURL alloc] initFileURLWithPath:audioFilePath];
+   
+   // Init the audio player.
+   NSError *error;
+   player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathAsURL error:&error];
+   
+   // Check out what's wrong in case that the player doesn't init.
+   if (error) {
+      NSLog(@"%@", [error localizedDescription]);
+   }
+   else{
+      // In this example we'll pre-load the audio into the buffer. You may avoid it if you want
+      // as it's not always possible to pre-load the audio.
+      [player prepareToPlay];
+   }
+   
+   // Release the resources used previously.
+//   [pathAsURL release];
+   
+   [player setDelegate:self];}
 
 
 -(id) init
@@ -168,10 +200,22 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(void)screenTapped
 {
     if (!_gameOver) {
-//        [self launchMissile];
        [self launchBullet];
     }
 }
+
+-(void)screenWasSwipedRight
+{
+   if (!_gameOver) {
+      if(_missileCount > 0)
+      {
+         [self launchMissile];
+         _missileCount--;
+         _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
+      }
+   }
+}
+
 
 - (void)update:(CCTime)delta
 {
@@ -356,6 +400,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     return TRUE;
 }
 
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero bonus:(CCNode *)bonus {
+   [player play];
+   [bonus removeFromParent];
+   _missileCount = _missileCount + 3;
+   _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
+   return TRUE;
+}
+
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero level:(CCNode *)level {
     
     [self heroRemoved:hero];
@@ -382,6 +434,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [_bannerView removeFromSuperview];
     interstitial.delegate = nil;
     interstitial = nil;
+   player.delegate = nil;
+    player = nil;
 
     [super onExit];
 }
