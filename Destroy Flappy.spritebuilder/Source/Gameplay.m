@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    NSInteger _missileCount;
    AVAudioPlayer *bonusSound;
    AVAudioPlayer *clickSound;
+   AVAudioPlayer *errorSound;
 
 }
 
@@ -153,6 +154,24 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    }
    
    [clickSound setDelegate:self];
+   
+   // error sound
+   NSString *audioFilePath3 = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"wav"];
+   NSURL *pathAsURL3 = [[NSURL alloc] initFileURLWithPath:audioFilePath3];
+   NSError *error3;
+   errorSound = [[AVAudioPlayer alloc] initWithContentsOfURL:pathAsURL3 error:&error3];
+   
+   // Check out what's wrong in case that the player doesn't init.
+   if (error3) {
+      NSLog(@"%@", [error3 localizedDescription]);
+   }
+   else{
+      // In this example we'll pre-load the audio into the buffer. You may avoid it if you want
+      // as it's not always possible to pre-load the audio.
+      [errorSound prepareToPlay];
+   }
+   
+   [errorSound setDelegate:self];
 
 }
 
@@ -229,6 +248,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
          [self launchMissile];
          _missileCount--;
          _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
+      }
+      else{
+         [errorSound play];
       }
    }
 }
@@ -380,6 +402,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     Obstacle *obstacle = (Obstacle *)[CCBReader load:@"Obstacle"];
     obstacle.position = ccp(previousObstacleXPosition + distanceBetweenObstacles, 0);
+    [obstacle getMissileCount:_missileCount];
     [obstacle setupRandomPosition];
     [obstacle setupRandomTarget];
     [_physicsNode addChild:obstacle];
@@ -392,6 +415,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [target removeFromParent];
     [self missileRemoved:missile];
     return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile metalTarget:(CCNode *)metalTarget {
+   [metalTarget removeFromParent];
+   [self missileRemoved:missile];
+   return TRUE;
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair missile:(CCNode *)missile level:(CCNode *)level {
@@ -410,11 +439,23 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    return TRUE;
 }
 
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet metalTarget:(CCNode *)metalTarget {
+   [self bulletRemoved:bullet];
+   return TRUE;
+}
+
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero target:(CCNode *)target {
     [target removeFromParent];
     [self heroRemoved:hero];
     [self gameOver];
     return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero metalTarget:(CCNode *)metalTarget {
+   [metalTarget removeFromParent];
+   [self heroRemoved:hero];
+   [self gameOver];
+   return TRUE;
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero bonus:(CCNode *)bonus {
@@ -456,6 +497,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     bonusSound = nil;
    clickSound.delegate = nil;
    clickSound = nil;
+   errorSound.delegate = nil;
+   errorSound = nil;
 
     [super onExit];
 }

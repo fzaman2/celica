@@ -11,4 +11,5 @@
 @interface Obstacle : CCNode
 - (void)setupRandomPosition;
 - (void)setupRandomTarget;
+- (void)getMissileCount:(NSInteger)missileCount;
 @end
