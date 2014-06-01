@@ -48,7 +48,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     GADInterstitial *interstitial;
     CCLabelTTF *_missileLabel;
    NSInteger _missileCount;
-   AVAudioPlayer *player;
+   AVAudioPlayer *bonusSound;
+   AVAudioPlayer *clickSound;
 
 }
 
@@ -116,12 +117,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    
    // The AV Audio Player needs a URL to the file that will be played to be specified.
    // So, we're going to set the audio file's path and then convert it to a URL.
+   // Bonus Sound
    NSString *audioFilePath = [[NSBundle mainBundle] pathForResource:@"picked-coin-echo-2" ofType:@"wav"];
    NSURL *pathAsURL = [[NSURL alloc] initFileURLWithPath:audioFilePath];
    
    // Init the audio player.
    NSError *error;
-   player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathAsURL error:&error];
+   bonusSound = [[AVAudioPlayer alloc] initWithContentsOfURL:pathAsURL error:&error];
    
    // Check out what's wrong in case that the player doesn't init.
    if (error) {
@@ -130,14 +132,29 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    else{
       // In this example we'll pre-load the audio into the buffer. You may avoid it if you want
       // as it's not always possible to pre-load the audio.
-      [player prepareToPlay];
+      [bonusSound prepareToPlay];
    }
    
-   // Release the resources used previously.
-//   [pathAsURL release];
+   [bonusSound setDelegate:self];
+   // click sound
+   NSString *audioFilePath2 = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
+   NSURL *pathAsURL2 = [[NSURL alloc] initFileURLWithPath:audioFilePath2];
+   NSError *error2;
+   clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:pathAsURL2 error:&error2];
    
-   [player setDelegate:self];}
+   // Check out what's wrong in case that the player doesn't init.
+   if (error2) {
+      NSLog(@"%@", [error2 localizedDescription]);
+   }
+   else{
+      // In this example we'll pre-load the audio into the buffer. You may avoid it if you want
+      // as it's not always possible to pre-load the audio.
+      [clickSound prepareToPlay];
+   }
+   
+   [clickSound setDelegate:self];
 
+}
 
 -(id) init
 {
@@ -401,7 +418,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero bonus:(CCNode *)bonus {
-   [player play];
+   [bonusSound play];
    [bonus removeFromParent];
    _missileCount = _missileCount + 3;
    _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
@@ -423,6 +440,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 
 - (void)restart {
+   [clickSound play];
     [self presentInterlude];
 }
 
@@ -434,8 +452,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [_bannerView removeFromSuperview];
     interstitial.delegate = nil;
     interstitial = nil;
-   player.delegate = nil;
-    player = nil;
+   bonusSound.delegate = nil;
+    bonusSound = nil;
+   clickSound.delegate = nil;
+   clickSound = nil;
 
     [super onExit];
 }

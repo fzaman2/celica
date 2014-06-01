@@ -11,7 +11,8 @@
 		3A16F910192EA72D0048C649 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F90F192EA72D0048C649 /* iAd.framework */; };
 		3AA4C9BB191F479F00FB1CF9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA4C9BA191F479F00FB1CF9 /* CoreMotion.framework */; };
 		3ABE1C3E1936D5140036632C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ABE1C3D1936D5140036632C /* Images.xcassets */; };
-		3AC01FA219397E02007C5DB2 /* picked-coin-echo-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3AC01FA119397E02007C5DB2 /* picked-coin-echo-2.wav */; };
+		3AC01FA41939844D007C5DB2 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3AC01FA31939844D007C5DB2 /* click.wav */; };
+		3AC01FA619398464007C5DB2 /* picked-coin-echo-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3AC01FA519398464007C5DB2 /* picked-coin-echo-2.wav */; };
 		3AF5D79B1934FC450031E73B /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF5D7991934FC450031E73B /* libGoogleAdMobAds.a */; };
 		3AF5D79C1934FC450031E73B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3AF5D79A1934FC450031E73B /* README.txt */; };
 		3AF5D79F1934FCBD0031E73B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF5D79E1934FCBD0031E73B /* AdSupport.framework */; };
@@ -78,7 +79,8 @@
 		3A16F90F192EA72D0048C649 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		3AA4C9BA191F479F00FB1CF9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3ABE1C3D1936D5140036632C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Destroy Flappy/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		3AC01FA119397E02007C5DB2 /* picked-coin-echo-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "picked-coin-echo-2.wav"; path = "SpriteBuilder Resources/picked-coin-echo-2.wav"; sourceTree = SOURCE_ROOT; };
+		3AC01FA31939844D007C5DB2 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		3AC01FA519398464007C5DB2 /* picked-coin-echo-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "picked-coin-echo-2.wav"; sourceTree = "<group>"; };
 		3AF5D78D1934FC440031E73B /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = "../../../Downloads/GoogleMobileAdsSdkiOS-6.9.2/GADAdMobExtras.h"; sourceTree = "<group>"; };
 		3AF5D78E1934FC440031E73B /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = "../../../Downloads/GoogleMobileAdsSdkiOS-6.9.2/GADAdNetworkExtras.h"; sourceTree = "<group>"; };
 		3AF5D78F1934FC440031E73B /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = "../../../Downloads/GoogleMobileAdsSdkiOS-6.9.2/GADAdSize.h"; sourceTree = "<group>"; };
@@ -305,7 +307,8 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3AC01FA119397E02007C5DB2 /* picked-coin-echo-2.wav */,
+				3AC01FA519398464007C5DB2 /* picked-coin-echo-2.wav */,
+				3AC01FA31939844D007C5DB2 /* click.wav */,
 				3ABE1C3D1936D5140036632C /* Images.xcassets */,
 				B73789911807667A0076A88C /* Icons */,
 				B737893A180761570076A88C /* Published-iOS */,
@@ -410,7 +413,8 @@
 				3AF5D79C1934FC450031E73B /* README.txt in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
-				3AC01FA219397E02007C5DB2 /* picked-coin-echo-2.wav in Resources */,
+				3AC01FA41939844D007C5DB2 /* click.wav in Resources */,
+				3AC01FA619398464007C5DB2 /* picked-coin-echo-2.wav in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				3ABE1C3E1936D5140036632C /* Images.xcassets in Resources */,
