@@ -10,7 +10,7 @@
 @implementation Obstacle {
     CCNode *_topPipe;
     CCNode *_bottomPipe;
-    CCNode *_target, *_target2, *_target3;
+    CCNode *_target, *_target2, *_target3, *_target4;
     CCNode *_bonus1;
     int _random,_random2;
     int _yPosition;
@@ -44,6 +44,7 @@ static const CGFloat pipeDistance = 100.f;
     _target.position = ccp(_target.position.x,_topPipe.position.y + pipeDistance/2);
     _target2.position = ccp(_target2.position.x,_topPipe.position.y + pipeDistance/1.25);
     _target3.position = ccp(_target3.position.x,_topPipe.position.y + pipeDistance/2.85);
+    _target4.position = ccp(_target4.position.x,_topPipe.position.y + pipeDistance/2);
     _bottomPipe.position = ccp(_bottomPipe.position.x, _topPipe.position.y + pipeDistance);
     _bonus1.position = ccp(_bonus1.position.x,_topPipe.position.y + pipeDistance);
 //    CCLOG(@"%f",_bottomPipe.position.x);
@@ -62,6 +63,8 @@ static const CGFloat pipeDistance = 100.f;
     _target2.physicsBody.sensor = TRUE;
    _target3.physicsBody.collisionType = @"target";
    _target3.physicsBody.sensor = TRUE;
+   _target4.physicsBody.collisionType = @"target";
+   _target4.physicsBody.sensor = TRUE;
    _bonus1.physicsBody.collisionType = @"bonus";
    _bonus1.physicsBody.sensor = TRUE;
 }

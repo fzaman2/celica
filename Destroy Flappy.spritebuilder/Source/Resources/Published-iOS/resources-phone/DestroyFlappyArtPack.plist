@@ -7,7 +7,7 @@
 		<key>DestroyFlappyArtPack/Airspeed_indicator.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 893}, {119, 119}}</string>
+			<string>{{67, 886}, {119, 119}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -20,11 +20,11 @@
 		<key>DestroyFlappyArtPack/airspeed_indicator_needle.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 278}, {52, 43}}</string>
+			<string>{{359, 223}, {52, 43}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {52, 43}}</string>
 			<key>sourceSize</key>
@@ -46,7 +46,7 @@
 		<key>DestroyFlappyArtPack/bonus.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{388, 1}, {55, 53}}</string>
+			<string>{{188, 951}, {55, 53}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -59,11 +59,11 @@
 		<key>DestroyFlappyArtPack/bullet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 1014}, {13, 6}}</string>
+			<string>{{67, 1007}, {13, 6}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {13, 6}}</string>
 			<key>sourceSize</key>
@@ -98,7 +98,7 @@
 		<key>DestroyFlappyArtPack/crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 212}, {64, 64}}</string>
+			<string>{{188, 885}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -111,11 +111,11 @@
 		<key>DestroyFlappyArtPack/fly1.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{122, 882}, {164, 114}}</string>
+			<string>{{281, 856}, {164, 114}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {164, 114}}</string>
 			<key>sourceSize</key>
@@ -124,7 +124,7 @@
 		<key>DestroyFlappyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{288, 856}, {162, 110}}</string>
+			<string>{{323, 323}, {162, 110}}</string>
 			<key>offset</key>
 			<string>{1, 2}</string>
 			<key>rotated</key>
@@ -137,11 +137,11 @@
 		<key>DestroyFlappyArtPack/gameover.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 323}, {220, 160}}</string>
+			<string>{{359, 1}, {220, 160}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{2, 4}, {220, 160}}</string>
 			<key>sourceSize</key>
@@ -163,11 +163,11 @@
 		<key>DestroyFlappyArtPack/jet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 1}, {104, 27}}</string>
+			<string>{{175, 856}, {104, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{4, 4}, {104, 27}}</string>
 			<key>sourceSize</key>
@@ -176,24 +176,37 @@
 		<key>DestroyFlappyArtPack/jet2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 107}, {103, 27}}</string>
+			<string>{{359, 277}, {103, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{5, 4}, {103, 27}}</string>
 			<key>sourceSize</key>
 			<string>{111, 35}</string>
 		</dict>
+		<key>DestroyFlappyArtPack/metal_crate.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 893}, {64, 129}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {64, 129}}</string>
+			<key>sourceSize</key>
+			<string>{64, 129}</string>
+		</dict>
 		<key>DestroyFlappyArtPack/missile.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{122, 998}, {52, 17}}</string>
+			<string>{{254, 885}, {52, 17}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{1, 0}, {52, 17}}</string>
 			<key>sourceSize</key>
