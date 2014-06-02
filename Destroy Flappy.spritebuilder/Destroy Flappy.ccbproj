@@ -90,6 +90,8 @@
 		</dict>
 		<key>DestroyFlappyArtPack</key>
 		<dict>
+			<key>isDirty</key>
+			<true/>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 		</dict>
@@ -209,8 +211,6 @@
 			<integer>0</integer>
 			<key>format_ios_sound_quality</key>
 			<integer>0</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 		<key>impact-9.wav</key>
 		<dict>
@@ -222,8 +222,6 @@
 			<integer>0</integer>
 			<key>format_ios_sound_quality</key>
 			<integer>0</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 		<key>jet-sound-old1.wav</key>
 		<dict>
@@ -235,8 +233,6 @@
 			<integer>0</integer>
 			<key>format_ios_sound_quality</key>
 			<integer>0</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 		<key>jet-sound.wav</key>
 		<dict>
@@ -248,8 +244,6 @@
 			<integer>0</integer>
 			<key>format_ios_sound_quality</key>
 			<integer>0</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 	</dict>
 	<key>versionStr</key>

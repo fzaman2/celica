@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CGFloat _scrollSpeed;
     CGFloat _elapsedTime;
     NSInteger _points,_prevPoint;
+   NSInteger _localCounter;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_label;
     CGFloat _swiped;
@@ -311,6 +312,33 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self spawnNewObstacle];
     }
     }
+    else
+    {
+       if(_gameOverBox.position.y < 163)
+       {
+          _gameOverBox.position = ccp(_gameOverBox.position.x, _gameOverBox.position.y + 5);
+          CCLOG(@"%f", _gameOverBox.position.y);
+       }
+       if(_highScoreValue.position.y < 124)
+       {
+          _highScoreValue.position = ccp(_highScoreValue.position.x, _highScoreValue.position.y + 5);
+          CCLOG(@"%f", _highScoreValue.position.y);
+       }
+       if(_scoreValue.position.y < 155)
+       {
+          _scoreValue.position = ccp(_scoreValue.position.x, _scoreValue.position.y + 5);
+          CCLOG(@"%f", _scoreValue.position.y);
+       }
+       else
+       {
+          if(_localCounter < _points)
+          {
+             _localCounter++;
+          _scoreValue.string = [NSString stringWithFormat:@"%d", _localCounter];
+          }
+       }
+       
+    }
 }
 
 - (void)launchMissile {
@@ -513,13 +541,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _gameOverBox.visible = TRUE;
         _highScoreValue.visible = TRUE;
         _scoreValue.visible = TRUE;
-        _scoreValue.string = [NSString stringWithFormat:@"%d", _points];
         [_hero stopAllActions];
-        CCActionMoveBy *moveBy = [CCActionMoveBy actionWithDuration:0.2f position:ccp(-2, 2)];
-        CCActionInterval *reverseMovement = [moveBy reverse];
-        CCActionSequence *shakeSequence = [CCActionSequence actionWithArray:@[moveBy, reverseMovement]];
-        CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:shakeSequence];
-
+       
+//        CCActionMoveBy *moveBy = [CCActionMoveBy actionWithDuration:0.5f position:ccp(0, 163)];
+//        CCActionInterval *reverseMovement = [moveBy reverse];
+//        CCActionSequence *shakeSequence = [CCActionSequence actionWithArray:@[moveBy, reverseMovement]];
+//        CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:shakeSequence];
+//       [_gameOverBox runAction:bounce];
+       
         // save high score
         //To save the score (in this case, 10000 ) to standard defaults:
         
@@ -536,7 +565,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self layoutAnimated:YES];
 //        [_bannerView setAlpha:1];
         _bannerView.hidden = NO;
-        [self runAction:bounce];
+//        [self runAction:bounce];
     }
 }
 
