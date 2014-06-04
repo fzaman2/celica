@@ -615,8 +615,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1547,7 +1545,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>TimesNewRomanPSMT</string>
+						<string>HelveticaNeue-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1673,6 +1671,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>animatedProperties</key>
