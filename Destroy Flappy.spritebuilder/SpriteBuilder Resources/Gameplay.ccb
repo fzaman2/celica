@@ -767,8 +767,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>167.50401306152344</real>
-							<real>325</real>
+							<real>160</real>
+							<real>80</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -816,8 +816,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>40</real>
-							<real>40</real>
+							<real>100</real>
+							<real>50</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -850,7 +850,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>Restart</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>
@@ -862,7 +862,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>DestroyFlappyArtPack/playbutton200x100.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -873,7 +873,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>DestroyFlappyArtPack/playbutton200x100.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -897,7 +897,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>DestroyFlappyArtPack/playbutton200x100.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -916,7 +916,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>DestroyFlappyArtPack/playbutton200x100.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1044,6 +1044,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -1596,8 +1598,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>

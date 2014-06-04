@@ -17,14 +17,27 @@
 			<key>sourceSize</key>
 			<string>{120, 120}</string>
 		</dict>
+		<key>DestroyFlappyArtPack/Touch Gesture.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{471, 1}, {89, 158}}</string>
+			<key>offset</key>
+			<string>{-1, -7}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 15}, {89, 158}}</string>
+			<key>sourceSize</key>
+			<string>{93, 175}</string>
+		</dict>
 		<key>DestroyFlappyArtPack/airspeed_indicator_needle.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 278}, {52, 43}}</string>
+			<string>{{562, 1}, {52, 43}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {52, 43}}</string>
 			<key>sourceSize</key>
@@ -46,7 +59,7 @@
 		<key>DestroyFlappyArtPack/bonus.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{388, 67}, {55, 53}}</string>
+			<string>{{556, 161}, {55, 53}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -98,7 +111,7 @@
 		<key>DestroyFlappyArtPack/crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 212}, {64, 64}}</string>
+			<string>{{490, 161}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -124,7 +137,7 @@
 		<key>DestroyFlappyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{288, 856}, {162, 110}}</string>
+			<string>{{359, 1}, {162, 110}}</string>
 			<key>offset</key>
 			<string>{1, 2}</string>
 			<key>rotated</key>
@@ -137,15 +150,15 @@
 		<key>DestroyFlappyArtPack/gameover.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{323, 323}, {220, 160}}</string>
+			<string>{{323, 323}, {233, 176}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{2, 4}, {220, 160}}</string>
+			<string>{{6, 4}, {233, 176}}</string>
 			<key>sourceSize</key>
-			<string>{225, 168}</string>
+			<string>{247, 185}</string>
 		</dict>
 		<key>DestroyFlappyArtPack/ground.png</key>
 		<dict>
@@ -163,7 +176,7 @@
 		<key>DestroyFlappyArtPack/jet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 1}, {104, 27}}</string>
+			<string>{{432, 165}, {104, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
@@ -176,7 +189,7 @@
 		<key>DestroyFlappyArtPack/jet2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 107}, {103, 27}}</string>
+			<string>{{461, 165}, {103, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
@@ -189,7 +202,7 @@
 		<key>DestroyFlappyArtPack/metal_crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{388, 1}, {64, 64}}</string>
+			<string>{{532, 227}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -237,6 +250,45 @@
 			<string>{{1, 0}, {51, 385}}</string>
 			<key>sourceSize</key>
 			<string>{53, 386}</string>
+		</dict>
+		<key>DestroyFlappyArtPack/playbutton.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{359, 165}, {146, 71}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{2, 2}, {146, 71}}</string>
+			<key>sourceSize</key>
+			<string>{150, 75}</string>
+		</dict>
+		<key>DestroyFlappyArtPack/playbutton200x100.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{432, 271}, {98, 48}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 1}, {98, 48}}</string>
+			<key>sourceSize</key>
+			<string>{100, 50}</string>
+		</dict>
+		<key>DestroyFlappyArtPack/swipe right.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{288, 856}, {165, 169}}</string>
+			<key>offset</key>
+			<string>{2, -2}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{7, 5}, {165, 169}}</string>
+			<key>sourceSize</key>
+			<string>{175, 175}</string>
 		</dict>
 	</dict>
 	<key>metadata</key>

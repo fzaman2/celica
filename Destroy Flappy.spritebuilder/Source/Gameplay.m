@@ -314,20 +314,17 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     else
     {
-       if(_gameOverBox.position.y < 163)
+       if(_gameOverBox.position.y < 190)
        {
           _gameOverBox.position = ccp(_gameOverBox.position.x, _gameOverBox.position.y + 5);
-          CCLOG(@"%f", _gameOverBox.position.y);
        }
-       if(_highScoreValue.position.y < 124)
+       if(_highScoreValue.position.y < 150)
        {
           _highScoreValue.position = ccp(_highScoreValue.position.x, _highScoreValue.position.y + 5);
-          CCLOG(@"%f", _highScoreValue.position.y);
        }
-       if(_scoreValue.position.y < 155)
+       if(_scoreValue.position.y < 180)
        {
           _scoreValue.position = ccp(_scoreValue.position.x, _scoreValue.position.y + 5);
-          CCLOG(@"%f", _scoreValue.position.y);
        }
        else
        {

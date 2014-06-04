@@ -402,8 +402,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>155.20001220703125</real>
-							<real>188.40000915527344</real>
+							<real>164.36668395996094</real>
+							<real>96.733352661132812</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -636,8 +636,6 @@
 						<string>Hero.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
