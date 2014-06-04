@@ -7,7 +7,7 @@
 		<key>DestroyFlappyArtPack/Airspeed_indicator.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 893}, {119, 119}}</string>
+			<string>{{359, 172}, {119, 119}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -20,20 +20,20 @@
 		<key>DestroyFlappyArtPack/Touch Gesture.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{475, 1}, {89, 158}}</string>
+			<string>{{243, 856}, {89, 166}}</string>
 			<key>offset</key>
-			<string>{-1, -7}</string>
+			<string>{-1, -3}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0, 15}, {89, 158}}</string>
+			<string>{{0, 7}, {89, 166}}</string>
 			<key>sourceSize</key>
 			<string>{93, 175}</string>
 		</dict>
 		<key>DestroyFlappyArtPack/airspeed_indicator_needle.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{573, 133}, {52, 43}}</string>
+			<string>{{980, 67}, {52, 43}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -59,11 +59,11 @@
 		<key>DestroyFlappyArtPack/bonus.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{523, 261}, {55, 53}}</string>
+			<string>{{923, 67}, {55, 53}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{1, 0}, {55, 53}}</string>
 			<key>sourceSize</key>
@@ -72,7 +72,7 @@
 		<key>DestroyFlappyArtPack/bullet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 1014}, {13, 6}}</string>
+			<string>{{1, 1017}, {13, 6}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -111,7 +111,7 @@
 		<key>DestroyFlappyArtPack/crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{566, 1}, {64, 64}}</string>
+			<string>{{957, 1}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -124,11 +124,11 @@
 		<key>DestroyFlappyArtPack/fly1.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 1}, {164, 114}}</string>
+			<string>{{480, 172}, {164, 114}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {164, 114}}</string>
 			<key>sourceSize</key>
@@ -137,7 +137,7 @@
 		<key>DestroyFlappyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 167}, {162, 110}}</string>
+			<string>{{693, 1}, {162, 110}}</string>
 			<key>offset</key>
 			<string>{1, 2}</string>
 			<key>rotated</key>
@@ -176,11 +176,11 @@
 		<key>DestroyFlappyArtPack/jet.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{122, 890}, {104, 27}}</string>
+			<string>{{359, 293}, {104, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{4, 4}, {104, 27}}</string>
 			<key>sourceSize</key>
@@ -189,7 +189,7 @@
 		<key>DestroyFlappyArtPack/jet2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{359, 279}, {103, 27}}</string>
+			<string>{{465, 293}, {103, 27}}</string>
 			<key>offset</key>
 			<string>{1, 0}</string>
 			<key>rotated</key>
@@ -202,7 +202,7 @@
 		<key>DestroyFlappyArtPack/metal_crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{566, 67}, {64, 64}}</string>
+			<string>{{857, 51}, {64, 64}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -254,7 +254,7 @@
 		<key>DestroyFlappyArtPack/playbutton.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{161, 871}, {146, 71}}</string>
+			<string>{{170, 871}, {146, 71}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -267,26 +267,52 @@
 		<key>DestroyFlappyArtPack/playbutton200x100.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{523, 161}, {98, 48}}</string>
+			<string>{{857, 1}, {98, 48}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{1, 1}, {98, 48}}</string>
 			<key>sourceSize</key>
 			<string>{100, 50}</string>
 		</dict>
+		<key>DestroyFlappyArtPack/swipe down.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 893}, {167, 122}}</string>
+			<key>offset</key>
+			<string>{1, -23}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{5, 49}, {167, 122}}</string>
+			<key>sourceSize</key>
+			<string>{175, 175}</string>
+		</dict>
 		<key>DestroyFlappyArtPack/swipe right.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{234, 856}, {165, 169}}</string>
+			<string>{{359, 1}, {165, 169}}</string>
 			<key>offset</key>
 			<string>{2, -2}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{7, 5}, {165, 169}}</string>
+			<key>sourceSize</key>
+			<string>{175, 175}</string>
+		</dict>
+		<key>DestroyFlappyArtPack/swipe up.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{526, 1}, {168, 165}}</string>
+			<key>offset</key>
+			<string>{3, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{6, 3}, {168, 165}}</string>
 			<key>sourceSize</key>
 			<string>{175, 175}</string>
 		</dict>
