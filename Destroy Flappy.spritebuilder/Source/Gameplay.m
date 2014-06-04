@@ -24,12 +24,19 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 @implementation Gameplay
 {
     CCPhysicsNode *_physicsNode;
+   CCPhysicsNode *_cloudPhysicsNode;
     CCNode *_levelNode;
     CCNode *_contentNode;
     CCSprite *_hero;
     CCNode *_ground1;
     CCNode *_ground2;
+   CCNode *_cloud1;
+   CCNode *_cloud2;
+   CCNode *_bush1;
+   CCNode *_bush2;
     NSArray *_grounds;
+   NSArray *_clouds;
+   NSArray *_bushes;
     NSTimeInterval _sinceTouch;
     NSMutableArray *_obstacles;
     CCButton *_restartButton;
@@ -66,7 +73,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _physicsNode.collisionDelegate = self;
     
     _grounds = @[_ground1, _ground2];
-    
+   _clouds = @[_cloud1, _cloud2];
+   _bushes = @[_bush1, _bush2];
+   
     _obstacles = [NSMutableArray array];
     [self spawnNewObstacle];
     [self spawnNewObstacle];
@@ -291,8 +300,34 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     
     }
+       _cloudPhysicsNode.position = ccp(_cloudPhysicsNode.position.x - (_scrollSpeed/8 *delta), _cloudPhysicsNode.position.y);
+       // loop the clouds
+       for (CCNode *cloud in _clouds) {
+          // get the world position of the cloud
+          CGPoint cloudWorldPosition = [_cloudPhysicsNode convertToWorldSpace:cloud.position];
+          // get the screen position of the cloud
+          CGPoint cloudScreenPosition = [self convertToNodeSpace:cloudWorldPosition];
+          // if the left corner is one complete width off the screen, move it to the right
+          if (cloudScreenPosition.x <= (-0.5 * cloud.contentSize.width)) {
+             cloud.position = ccp(cloud.position.x + 2 * cloud.contentSize.width, cloud.position.y);
+          }
+          
+       }
     
-    // Spawning new obstacles when old ones leave the screen
+       // loop the bushes
+       for (CCNode *bush in _bushes) {
+          // get the world position of the bush
+          CGPoint bushWorldPosition = [_cloudPhysicsNode convertToWorldSpace:bush.position];
+          // get the screen position of the bush
+          CGPoint bushScreenPosition = [self convertToNodeSpace:bushWorldPosition];
+          // if the left corner is one complete width off the screen, move it to the right
+          if (bushScreenPosition.x <= (-0.5 * bush.contentSize.width)) {
+             bush.position = ccp(bush.position.x + 2 * bush.contentSize.width, bush.position.y);
+          }
+          
+       }
+
+       // Spawning new obstacles when old ones leave the screen
     
     NSMutableArray *offScreenObstacles = nil;
     for (CCNode *obstacle in _obstacles) {
