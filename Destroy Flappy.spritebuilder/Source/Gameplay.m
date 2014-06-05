@@ -257,7 +257,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
       {
          [self launchMissile];
          _missileCount--;
-         _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
+         _missileLabel.string = [NSString stringWithFormat:@"%ld", (long)_missileCount];
       }
       else{
          [errorSound play];
@@ -366,7 +366,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
           if(_localCounter < _points)
           {
              _localCounter++;
-          _scoreValue.string = [NSString stringWithFormat:@"%d", _localCounter];
+          _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter];
           }
        }
        
@@ -522,7 +522,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    [bonusSound play];
    [bonus removeFromParent];
    _missileCount = _missileCount + 3;
-   _missileLabel.string = [NSString stringWithFormat:@"%d", _missileCount];
+   _missileLabel.string = [NSString stringWithFormat:@"%ld", (long)_missileCount];
    return TRUE;
 }
 
@@ -536,7 +536,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero goal:(CCNode *)goal {
     [goal removeFromParent];
     _points++;
-    _scoreLabel.string = [NSString stringWithFormat:@"%d", _points];
+    _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     return TRUE;
 }
 
@@ -593,7 +593,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         
         }
         _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
-        _highScoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
+        _highScoreValue.string = [NSString stringWithFormat:@"%ld", (long)_highScore];
         [self layoutAnimated:YES];
 //        [_bannerView setAlpha:1];
         _bannerView.hidden = NO;
@@ -604,7 +604,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(void)resetHighScore{
     [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"highScore"];
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
-    _highScoreValue.string = [NSString stringWithFormat:@"%d", _highScore];
+    _highScoreValue.string = [NSString stringWithFormat:@"%ld", (long)_highScore];
 }
 
 #pragma mark iAd Delegate Methods
