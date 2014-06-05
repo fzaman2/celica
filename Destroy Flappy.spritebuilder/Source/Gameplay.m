@@ -364,11 +364,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        else
        {
           _elapsedTime += delta;
-          if(_localCounter < _points && _elapsedTime > 0.5)
+          if(_localCounter <= _points && _elapsedTime > 0.5)
           {
              _restartButton.visible = TRUE;
              _localCounter++;
-          _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter];
+          _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter-1];
           }
        }
        
