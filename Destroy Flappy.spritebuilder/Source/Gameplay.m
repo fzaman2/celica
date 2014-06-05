@@ -363,8 +363,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        }
        else
        {
-          if(_localCounter < _points)
+          _elapsedTime += delta;
+          if(_localCounter < _points && _elapsedTime > 0.5)
           {
+             _restartButton.visible = TRUE;
              _localCounter++;
           _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter];
           }
@@ -569,7 +571,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if (!_gameOver) {
         _scrollSpeed = 0.f;
         _gameOver = TRUE;
-        _restartButton.visible = TRUE;
         _gameOverBox.visible = TRUE;
         _highScoreValue.visible = TRUE;
         _scoreValue.visible = TRUE;
