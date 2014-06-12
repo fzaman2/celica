@@ -113,6 +113,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    
    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipRight];
 
+   UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenWasSwipedRight)];
+   swipeLeft.numberOfTouchesRequired = 1;
+   swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+   
+   [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
+   
    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
     tapped.numberOfTapsRequired = 1;
     tapped.numberOfTouchesRequired = 1;

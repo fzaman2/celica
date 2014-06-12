@@ -28,6 +28,18 @@
         
         [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
         
+       UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
+       swipeRight.numberOfTouchesRequired = 1;
+       swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+       
+       [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
+       
+       UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
+       swipeLeft.numberOfTouchesRequired = 1;
+       swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+       
+       [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
+       
         UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped)];
         tapped.numberOfTapsRequired = 1;
         tapped.numberOfTouchesRequired = 1;
