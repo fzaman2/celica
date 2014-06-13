@@ -274,111 +274,110 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)update:(CCTime)delta
 {
-    if(!_gameOver){
-        if(_points == _prevPoint)
-        {
-            _scrollSpeed = scrollSpeedRate + _points;
-            _prevPoint++;
-        }
-        if (_hero.position.y - _newHeroPosition >= 80.0)
-        {
-            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
-        }
-        else if(_hero.position.y - _newHeroPosition <= -80.0)
-        {
-            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
-        }
-        else
-        {
-            _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
-        }
-//        CCLOG(@"%f",_hero.position.y);
-    _physicsNode.position = ccp(_physicsNode.position.x - (_scrollSpeed *delta), _physicsNode.position.y);
-    // loop the ground
-    for (CCNode *ground in _grounds) {
-        // get the world position of the ground
-        CGPoint groundWorldPosition = [_physicsNode convertToWorldSpace:ground.position];
-        // get the screen position of the ground
-        CGPoint groundScreenPosition = [self convertToNodeSpace:groundWorldPosition];
-        // if the left corner is one complete width off the screen, move it to the right
-        if (groundScreenPosition.x <= (-1 * ground.contentSize.width)) {
+   if(!_gameOver){
+      if(_points == _prevPoint)
+      {
+         _scrollSpeed = scrollSpeedRate + _points;
+         _prevPoint++;
+      }
+      if (_hero.position.y - _newHeroPosition >= 80.0)
+      {
+         _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
+      }
+      else if(_hero.position.y - _newHeroPosition <= -80.0)
+      {
+         _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y);
+      }
+      else
+      {
+         _hero.position = ccp(_hero.position.x + delta * _scrollSpeed, _hero.position.y + _swiped * yAccelSpeed);
+      }
+      //        CCLOG(@"%f",_hero.position.y);
+      _physicsNode.position = ccp(_physicsNode.position.x - (_scrollSpeed *delta), _physicsNode.position.y);
+      // loop the ground
+      for (CCNode *ground in _grounds) {
+         // get the world position of the ground
+         CGPoint groundWorldPosition = [_physicsNode convertToWorldSpace:ground.position];
+         // get the screen position of the ground
+         CGPoint groundScreenPosition = [self convertToNodeSpace:groundWorldPosition];
+         // if the left corner is one complete width off the screen, move it to the right
+         if (groundScreenPosition.x <= (-1 * ground.contentSize.width)) {
             ground.position = ccp(ground.position.x + 2 * ground.contentSize.width, ground.position.y);
-        }
-    
-    }
-       _cloudPhysicsNode.position = ccp(_cloudPhysicsNode.position.x - (_scrollSpeed/8 *delta), _cloudPhysicsNode.position.y);
-       // loop the clouds
-       for (CCNode *cloud in _clouds) {
-          // get the world position of the cloud
-          CGPoint cloudWorldPosition = [_cloudPhysicsNode convertToWorldSpace:cloud.position];
-          // get the screen position of the cloud
-          CGPoint cloudScreenPosition = [self convertToNodeSpace:cloudWorldPosition];
-          // if the left corner is one complete width off the screen, move it to the right
-          if (cloudScreenPosition.x <= (-0.5 * cloud.contentSize.width)) {
-             cloud.position = ccp(cloud.position.x + 2 * cloud.contentSize.width, cloud.position.y);
-          }
-          
-       }
-    
-       // loop the bushes
-       for (CCNode *bush in _bushes) {
-          // get the world position of the bush
-          CGPoint bushWorldPosition = [_cloudPhysicsNode convertToWorldSpace:bush.position];
-          // get the screen position of the bush
-          CGPoint bushScreenPosition = [self convertToNodeSpace:bushWorldPosition];
-          // if the left corner is one complete width off the screen, move it to the right
-          if (bushScreenPosition.x <= (-0.5 * bush.contentSize.width)) {
-             bush.position = ccp(bush.position.x + 2 * bush.contentSize.width, bush.position.y);
-          }
-          
-       }
-
-       // Spawning new obstacles when old ones leave the screen
-    
-    NSMutableArray *offScreenObstacles = nil;
-    for (CCNode *obstacle in _obstacles) {
-        CGPoint obstacleWorldPosition = [_physicsNode convertToWorldSpace:obstacle.position];
-        CGPoint obstacleScreenPosition = [self convertToNodeSpace:obstacleWorldPosition];
-        if (obstacleScreenPosition.x < -obstacle.contentSize.width) {
+         }
+         
+      }
+      _cloudPhysicsNode.position = ccp(_cloudPhysicsNode.position.x - (_scrollSpeed/8 *delta), _cloudPhysicsNode.position.y);
+      // loop the clouds
+      for (CCNode *cloud in _clouds) {
+         // get the world position of the cloud
+         CGPoint cloudWorldPosition = [_cloudPhysicsNode convertToWorldSpace:cloud.position];
+         // get the screen position of the cloud
+         CGPoint cloudScreenPosition = [self convertToNodeSpace:cloudWorldPosition];
+         // if the left corner is one complete width off the screen, move it to the right
+         if (cloudScreenPosition.x <= (-0.5 * cloud.contentSize.width)) {
+            cloud.position = ccp(cloud.position.x + 2 * cloud.contentSize.width, cloud.position.y);
+         }
+         
+      }
+      
+      // loop the bushes
+      for (CCNode *bush in _bushes) {
+         // get the world position of the bush
+         CGPoint bushWorldPosition = [_cloudPhysicsNode convertToWorldSpace:bush.position];
+         // get the screen position of the bush
+         CGPoint bushScreenPosition = [self convertToNodeSpace:bushWorldPosition];
+         // if the left corner is one complete width off the screen, move it to the right
+         if (bushScreenPosition.x <= (-0.5 * bush.contentSize.width)) {
+            bush.position = ccp(bush.position.x + 2 * bush.contentSize.width, bush.position.y);
+         }
+         
+      }
+      // Spawning new obstacles when old ones leave the screen
+      
+      NSMutableArray *offScreenObstacles = nil;
+      for (CCNode *obstacle in _obstacles) {
+         CGPoint obstacleWorldPosition = [_physicsNode convertToWorldSpace:obstacle.position];
+         CGPoint obstacleScreenPosition = [self convertToNodeSpace:obstacleWorldPosition];
+         if (obstacleScreenPosition.x < -obstacle.contentSize.width) {
             if (!offScreenObstacles) {
-                offScreenObstacles = [NSMutableArray array];
+               offScreenObstacles = [NSMutableArray array];
             }
             [offScreenObstacles addObject:obstacle];
-        }
-    }
-    for (CCNode *obstacleToRemove in offScreenObstacles) {
-        [obstacleToRemove removeFromParent];
-        [_obstacles removeObject:obstacleToRemove];
-        // for each removed obstacle, add a new one
-        [self spawnNewObstacle];
-    }
-    }
-    else
-    {
-       if(_gameOverBox.position.y < 190)
-       {
-          _gameOverBox.position = ccp(_gameOverBox.position.x, _gameOverBox.position.y + 5);
-       }
-       if(_highScoreValue.position.y < 150)
-       {
-          _highScoreValue.position = ccp(_highScoreValue.position.x, _highScoreValue.position.y + 5);
-       }
-       if(_scoreValue.position.y < 180)
-       {
-          _scoreValue.position = ccp(_scoreValue.position.x, _scoreValue.position.y + 5);
-       }
-       else
-       {
-          _elapsedTime += delta;
-          if(_localCounter <= _points && _elapsedTime > 0.5)
-          {
-             _restartButton.visible = TRUE;
-             _localCounter++;
-          _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter-1];
-          }
-       }
-       
-    }
+         }
+      }
+      for (CCNode *obstacleToRemove in offScreenObstacles) {
+         [obstacleToRemove removeFromParent];
+         [_obstacles removeObject:obstacleToRemove];
+         // for each removed obstacle, add a new one
+         [self spawnNewObstacle];
+      }
+   }
+   else
+   {
+      if(_gameOverBox.position.y < 190)
+      {
+         _gameOverBox.position = ccp(_gameOverBox.position.x, _gameOverBox.position.y + 5);
+      }
+      if(_highScoreValue.position.y < 150)
+      {
+         _highScoreValue.position = ccp(_highScoreValue.position.x, _highScoreValue.position.y + 5);
+      }
+      if(_scoreValue.position.y < 180)
+      {
+         _scoreValue.position = ccp(_scoreValue.position.x, _scoreValue.position.y + 5);
+      }
+      else
+      {
+         _elapsedTime += delta;
+         if(_localCounter <= _points && _elapsedTime > 0.5)
+         {
+            _restartButton.visible = TRUE;
+            _localCounter++;
+            _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter-1];
+         }
+      }
+      
+   }
 }
 
 - (void)launchMissile {
@@ -615,22 +614,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 
 #pragma mark iAd Delegate Methods
-
-//-(void)bannerViewDidLoadAd:(ADBannerView *)banner
-//{
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:1];
-//    [banner setAlpha:1];
-//    [UIView commitAnimations];
-//}
-//
-//-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-//{
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:1];
-//    [banner setAlpha:0];
-//    [UIView commitAnimations];
-//}
 
 - (void)layoutAnimated:(BOOL)animated
 {
