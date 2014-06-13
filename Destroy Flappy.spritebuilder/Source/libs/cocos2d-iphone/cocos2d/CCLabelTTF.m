@@ -110,7 +110,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 }
 
 // This is a private initializer
-- (id) initWithAttributedString:(NSAttributedString *)attrString fontName:(NSString*)fontName fontSize:(CGFloat)fontSize dimensions:(CGSize)dimensions
+- (id) initWithAttributedString:(NSAttributedString *)attrString fontName:(NSString*)fontName fontSize:(float)fontSize dimensions:(CGSize)dimensions
 {
     if ( (self = [super init]) )
     {
@@ -181,7 +181,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 	}
 }
 
-- (void) setFontSize:(CGFloat)fontSize
+- (void) setFontSize:(float)fontSize
 {
 	if( fontSize != _fontSize ) {
 		_fontSize = fontSize;
@@ -207,7 +207,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     }
 }
 
-- (void) setMinimumFontSize:(CGFloat)minimumFontSize
+- (void) setMinimumFontSize:(float)minimumFontSize
 {
     if (minimumFontSize != _minimumFontSize)
     {
@@ -274,7 +274,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     return [self convertPositionToPoints:self.shadowOffset type:_shadowOffsetType];
 }
 
-- (void) setShadowBlurRadius:(CGFloat)shadowBlurRadius
+- (void) setShadowBlurRadius:(float)shadowBlurRadius
 {
     if (_shadowBlurRadius != shadowBlurRadius)
     {
@@ -292,7 +292,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     }
 }
 
-- (void) setOutlineWidth:(CGFloat)outlineWidth
+- (void) setOutlineWidth:(float)outlineWidth
 {
     if (outlineWidth != _outlineWidth)
     {
@@ -484,27 +484,27 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     
     CGSize originalDimensions = _dimensions;
   
-    CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
+		CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
     originalDimensions.width *= scale;
     originalDimensions.height *= scale;
     
     CGSize dimensions = originalDimensions;
     
-    CGFloat shadowBlurRadius = _shadowBlurRadius * scale;
+    float shadowBlurRadius = _shadowBlurRadius * scale;
     CGPoint shadowOffset = ccpMult(self.shadowOffsetInPoints, scale);
-    CGFloat outlineWidth = _outlineWidth * scale;
+    float outlineWidth = _outlineWidth * scale;
     
     BOOL hasShadow = (_shadowColor.alpha > 0);
     BOOL hasOutline = (_outlineColor.alpha > 0 && _outlineWidth > 0);
     
-    CGFloat xOffset = 0;
-    CGFloat yOffset = 0;
-    CGFloat scaleFactor = 1;
+    float xOffset = 0;
+    float yOffset = 0;
+    float scaleFactor = 1;
     
-    CGFloat xPadding = 0;
-    CGFloat yPadding = 0;
-    CGFloat wDrawArea = 0;
-    CGFloat hDrawArea = 0;
+    float xPadding = 0;
+    float yPadding = 0;
+    float wDrawArea = 0;
+    float hDrawArea = 0;
     
     // Calculate padding
     if (hasShadow)
@@ -542,7 +542,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         // Handle strings with fixed dimensions
         if (_adjustsFontSizeToFit)
         {
-            CGFloat fontSize = [attributedString singleFontSize];
+            float fontSize = [attributedString singleFontSize];
             if (fontSize)
             {
                 // This is a string that can be resized (it only uses one font and size)
@@ -552,8 +552,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
                 CGSize wantedSize = [attributedString boundingRectWithSize:CGSizeZero options:NSStringDrawingUsesLineFragmentOrigin].size;
 #endif
                 
-                CGFloat wScaleFactor = 1;
-                CGFloat hScaleFactor = 1;
+                float wScaleFactor = 1;
+                float hScaleFactor = 1;
                 if (wantedSize.width > wDrawArea)
                 {
                     wScaleFactor = wDrawArea/wantedSize.width;
@@ -568,8 +568,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             
                 if (scaleFactor != 1)
                 {
-                    CGFloat newFontSize = fontSize * scaleFactor;
-                    CGFloat minFontSize = _minimumFontSize * scale;
+                    float newFontSize = fontSize * scaleFactor;
+                    float minFontSize = _minimumFontSize * scale;
                     if (minFontSize && newFontSize < minFontSize) newFontSize = minFontSize;
                     attributedString = [attributedString copyWithNewFontSize:newFontSize];
                 }
@@ -650,21 +650,23 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         CGContextSetTextDrawingMode(context, kCGTextFillStroke);
         CGContextSetLineWidth(context, outlineWidth * 2);
         CGContextSetLineJoin(context, kCGLineJoinRound);
-
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        
         NSMutableAttributedString* outlineString = [attributedString mutableCopy];
-        [outlineString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, outlineString.length)];
+        [outlineString removeAttribute:NSForegroundColorAttributeName range:NSMakeRange(0, outlineString.length)];
         
         [outlineString drawInRect:drawArea];
-
+        
+        CGContextSetTextDrawingMode(context, kCGTextFill);
+        
         // Don't draw shadow for main font
         CGContextSetShadowWithColor(context, CGSizeZero, 0, NULL);
-
+        
         if (hasShadow)
         {
             // Draw outline again because shadow overlap
             [outlineString drawInRect:drawArea];
         }
-        CGContextSetTextDrawingMode(context, kCGTextFill);
     }
     
     [attributedString drawInRect:drawArea];
@@ -682,7 +684,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 	[[NSAffineTransform transform] set];
     
     // XXX: The shadows are for some reason scaled on OS X if a retina display is connected
-    CGFloat retinaFix = 1;
+    float retinaFix = 1;
     for (NSScreen* screen in [NSScreen screens])
     {
         if (screen.backingScaleFactor > retinaFix) retinaFix = screen.backingScaleFactor;
@@ -802,23 +804,23 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 - (CCTexture*) createTextureWithString:(NSString*) string useFullColor:(BOOL)useFullColor
 {
     // Scale everything up by content scale
-    CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
+		CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
     UIFont* font = [UIFont fontWithName:_fontName size:_fontSize * scale];
-    CGFloat shadowBlurRadius = _shadowBlurRadius * scale;
+    float shadowBlurRadius = _shadowBlurRadius * scale;
     CGPoint shadowOffset = ccpMult(self.shadowOffsetInPoints, scale);
-    CGFloat outlineWidth = _outlineWidth * scale;
+    float outlineWidth = _outlineWidth * scale;
     
     BOOL hasShadow = (_shadowColor.alpha > 0);
     BOOL hasOutline = (_outlineColor.alpha > 0 && _outlineWidth > 0);
     
-    CGFloat xOffset = 0;
-    CGFloat yOffset = 0;
-    CGFloat scaleFactor = 1;
+    float xOffset = 0;
+    float yOffset = 0;
+    float scaleFactor = 1;
     
-    CGFloat xPadding = 0;
-    CGFloat yPadding = 0;
-    CGFloat wDrawArea = 0;
-    CGFloat hDrawArea = 0;
+    float xPadding = 0;
+    float yPadding = 0;
+    float wDrawArea = 0;
+    float hDrawArea = 0;
     
     CGSize originalDimensions = _dimensions;
     originalDimensions.width *= scale;
@@ -866,12 +868,12 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         // Handle strings with fixed dimensions
         if (_adjustsFontSizeToFit)
         {
-            CGFloat fontSize = font.pointSize;
+            float fontSize = font.pointSize;
             CGSize wantedSizeFirstLine = [string sizeWithFont:font];
             CGSize wantedSize = [string sizeWithFont:font constrainedToSize:CGSizeMake(wantedSizeFirstLine.width, 1024) lineBreakMode:0];
             
-            CGFloat wScaleFactor = 1;
-            CGFloat hScaleFactor = 1;
+            float wScaleFactor = 1;
+            float hScaleFactor = 1;
             if (wantedSize.width > wDrawArea)
             {
                 wScaleFactor = wDrawArea/wantedSize.width;
@@ -886,8 +888,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             
             if (scaleFactor != 1)
             {
-                CGFloat newFontSize = fontSize * scaleFactor;
-                CGFloat minFontSize = _minimumFontSize * scale;
+                float newFontSize = fontSize * scaleFactor;
+                float minFontSize = _minimumFontSize * scale;
                 if (minFontSize && newFontSize < minFontSize) newFontSize = minFontSize;
                 font = [UIFont fontWithName:font.fontName size:newFontSize];
             }

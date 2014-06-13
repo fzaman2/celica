@@ -51,9 +51,7 @@
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		C11456381912EA2A00089ED9 /* Obstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = C11456371912EA2A00089ED9 /* Obstacle.m */; };
 		C114563B19148A0600089ED9 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = C114563A19148A0600089ED9 /* Goal.m */; };
-		C1BD9E56190C6C2C00C22D50 /* Penguin.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BD9E55190C6C2C00C22D50 /* Penguin.m */; };
 		C1C8EA3F190B5480000C223E /* Missile.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C8EA3E190B5480000C223E /* Missile.m */; };
-		C1C8EA43190B54A4000C223E /* Seal.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C8EA42190B54A4000C223E /* Seal.m */; };
 		C1C8EA46190B5AA4000C223E /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C8EA45190B5AA4000C223E /* Gameplay.m */; };
 /* End PBXBuildFile section */
 
@@ -139,12 +137,8 @@
 		C11456371912EA2A00089ED9 /* Obstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Obstacle.m; path = Source/Obstacle.m; sourceTree = "<group>"; };
 		C114563919148A0600089ED9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Goal.h; path = Source/Goal.h; sourceTree = "<group>"; };
 		C114563A19148A0600089ED9 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Goal.m; path = Source/Goal.m; sourceTree = "<group>"; };
-		C1BD9E54190C6C2C00C22D50 /* Penguin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Penguin.h; path = Source/Penguin.h; sourceTree = "<group>"; };
-		C1BD9E55190C6C2C00C22D50 /* Penguin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Penguin.m; path = Source/Penguin.m; sourceTree = "<group>"; };
 		C1C8EA3D190B5480000C223E /* Missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Missile.h; sourceTree = "<group>"; };
 		C1C8EA3E190B5480000C223E /* Missile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Missile.m; sourceTree = "<group>"; };
-		C1C8EA41190B54A4000C223E /* Seal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Seal.h; path = Source/Seal.h; sourceTree = "<group>"; };
-		C1C8EA42190B54A4000C223E /* Seal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Seal.m; path = Source/Seal.m; sourceTree = "<group>"; };
 		C1C8EA44190B5AA4000C223E /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
 		C1C8EA45190B5AA4000C223E /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,12 +206,8 @@
 			children = (
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
-				C1BD9E54190C6C2C00C22D50 /* Penguin.h */,
-				C1BD9E55190C6C2C00C22D50 /* Penguin.m */,
 				C1C8EA3D190B5480000C223E /* Missile.h */,
 				C1C8EA3E190B5480000C223E /* Missile.m */,
-				C1C8EA41190B54A4000C223E /* Seal.h */,
-				C1C8EA42190B54A4000C223E /* Seal.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
 				C1C8EA44190B5AA4000C223E /* Gameplay.h */,
@@ -438,14 +428,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C114563B19148A0600089ED9 /* Goal.m in Sources */,
-				C1C8EA43190B54A4000C223E /* Seal.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				C11456381912EA2A00089ED9 /* Obstacle.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				3A10C9EB193813DD00CF88D5 /* Bullet.m in Sources */,
 				C1C8EA3F190B5480000C223E /* Missile.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
-				C1BD9E56190C6C2C00C22D50 /* Penguin.m in Sources */,
 				C1C8EA46190B5AA4000C223E /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

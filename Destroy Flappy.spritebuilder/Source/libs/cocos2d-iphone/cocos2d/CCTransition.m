@@ -164,8 +164,7 @@ typedef NS_ENUM(NSInteger, CCTransitionFixedFunction)
     _runTime = 0.0f;
     _progress = 0.0f;
     
-    _transitionPixelFormat = CCTexturePixelFormat_RGBA8888;
-		_transitionDepthStencilFormat = GL_DEPTH24_STENCIL8;
+    _transitionPixelFormat = CCTexturePixelFormat_RGB565;
     
     // disable touch during transition
     self.userInteractionEnabled = NO;
@@ -198,7 +197,7 @@ typedef NS_ENUM(NSInteger, CCTransitionFixedFunction)
     // create texture for outgoing scene
     _outgoingTexture = [CCRenderTexture renderTextureWithWidth:rect.size.width / _outgoingDownScale
                                                         height:rect.size.height / _outgoingDownScale
-                                                   pixelFormat:_transitionPixelFormat depthStencilFormat:_transitionDepthStencilFormat];
+                                                   pixelFormat:_transitionPixelFormat];
     _outgoingTexture.position = CGPointMake(rect.size.width * 0.5f + rect.origin.x, rect.size.height * 0.5f + rect.origin.y);
     _outgoingTexture.scale = _outgoingDownScale;
     [self addChild:_outgoingTexture z:_outgoingOverIncoming];
@@ -206,7 +205,7 @@ typedef NS_ENUM(NSInteger, CCTransitionFixedFunction)
     // create texture for incoming scene
     _incomingTexture = [CCRenderTexture renderTextureWithWidth:rect.size.width / _incomingDownScale
                                                         height:rect.size.height / _incomingDownScale
-                                                   pixelFormat:_transitionPixelFormat depthStencilFormat:_transitionDepthStencilFormat];
+                                                   pixelFormat:_transitionPixelFormat];
     _incomingTexture.position = CGPointMake(rect.size.width * 0.5f + rect.origin.x, rect.size.height * 0.5f + rect.origin.y);
     _incomingTexture.scale = _incomingDownScale;
     [self addChild:_incomingTexture];
@@ -278,7 +277,7 @@ typedef NS_ENUM(NSInteger, CCTransitionFixedFunction)
     _outgoingScene.scale = oldScale / _outgoingDownScale;
     
     glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColor);
-    [_outgoingTexture beginWithClear:clearColor[0] g:clearColor[1] b:clearColor[2] a:clearColor[3] depth:1.0 stencil:0];
+    [_outgoingTexture beginWithClear:clearColor[0] g:clearColor[1] b:clearColor[2] a:clearColor[3]];
     [_outgoingScene visit];
     [_outgoingTexture end];
     
@@ -295,7 +294,7 @@ typedef NS_ENUM(NSInteger, CCTransitionFixedFunction)
     _incomingScene.scale = oldScale / _incomingDownScale;
     
     glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColor);
-    [_incomingTexture beginWithClear:clearColor[0] g:clearColor[1] b:clearColor[2] a:clearColor[3] depth:1.0 stencil:0];
+    [_incomingTexture beginWithClear:clearColor[0] g:clearColor[1] b:clearColor[2] a:clearColor[3]];
     [_incomingScene visit];
     [_incomingTexture end];
     
