@@ -637,7 +637,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    message = [message stringByAppendingString:@" points in Destroy Flappy."];
    
    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObjects:message,_image, nil] applicationActivities:nil];
-   activityVC.excludedActivityTypes = @[ UIActivityTypeMessage ,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+   activityVC.excludedActivityTypes = @[ UIActivityTypeAssignToContact];
    [[CCDirector sharedDirector] presentViewController:activityVC animated:YES completion:nil];
 
 }
