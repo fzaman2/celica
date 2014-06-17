@@ -78,7 +78,7 @@ static const CGFloat pipeDistance = 100.f;
     if(_goTime)
     {
         _elapsedTime += delta;
-        if(_elapsedTime > 0.5)
+        if(_elapsedTime > 0.2)
         {
             _target.position = ccp(_target.position.x + delta/2, _target.position.y + delta/2);
 //            CCLOG(@"%f",_target.position.y);

@@ -9,7 +9,7 @@
 #import "Gameplay.h"
 #import "Obstacle.h"
 
-static const CGFloat scrollSpeedRate = 150.f;
+static const CGFloat scrollSpeedRate = 200.f;
 static const CGFloat yAccelSpeed = 10.f;
 static const CGFloat firstObstaclePosition = 280.f;
 static const CGFloat distanceBetweenObstacles = 320.f;
@@ -129,7 +129,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _newHeroPosition = _hero.position.y;
     
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
-    
+   _missileCount = [[NSUserDefaults standardUserDefaults]integerForKey:@"missileCount"];
+   _missileLabel.string = [NSString stringWithFormat:@"%ld", (long)_missileCount];
+
     [self cycleInterstitial]; // Prepare our interstitial for after the game so that we can be certain its ready to present
    
    // The AV Audio Player needs a URL to the file that will be played to be specified.
@@ -600,6 +602,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
         _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
         _highScoreValue.string = [NSString stringWithFormat:@"%ld", (long)_highScore];
+       
+       [[NSUserDefaults standardUserDefaults]setInteger:_missileCount forKey:@"missileCount"];
+       _missileCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"missileCount"];
+       
         [self layoutAnimated:YES];
 //        [_bannerView setAlpha:1];
         _bannerView.hidden = NO;
