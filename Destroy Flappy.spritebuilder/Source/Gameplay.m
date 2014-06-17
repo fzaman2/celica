@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSTimeInterval _sinceTouch;
     NSMutableArray *_obstacles;
     CCButton *_restartButton;
+   CCButton *_shareButton;
     BOOL _gameOver;
     CGFloat _scrollSpeed;
     CGFloat _elapsedTime;
@@ -59,6 +60,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    AVAudioPlayer *bonusSound;
    AVAudioPlayer *clickSound;
    AVAudioPlayer *errorSound;
+   UIImage *_image;
 
 }
 
@@ -374,6 +376,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
          if(_localCounter <= _points && _elapsedTime > 0.5)
          {
             _restartButton.visible = TRUE;
+            _shareButton.visible = TRUE;
             _localCounter++;
             _scoreValue.string = [NSString stringWithFormat:@"%ld", (long)_localCounter-1];
          }
@@ -606,6 +609,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        [[NSUserDefaults standardUserDefaults]setInteger:_missileCount forKey:@"missileCount"];
        _missileCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"missileCount"];
        
+       // Take Screen Shot
+       UIGraphicsBeginImageContextWithOptions([CCDirector sharedDirector].view.bounds.size, NO, [UIScreen mainScreen].scale);
+       
+       [[CCDirector sharedDirector].view drawViewHierarchyInRect:[CCDirector sharedDirector].view.bounds afterScreenUpdates:NO];
+       
+       _image = UIGraphicsGetImageFromCurrentImageContext();
+       UIGraphicsEndImageContext();
+       
+
         [self layoutAnimated:YES];
 //        [_bannerView setAlpha:1];
         _bannerView.hidden = NO;
@@ -617,6 +629,17 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"highScore"];
     _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"] ;
     _highScoreValue.string = [NSString stringWithFormat:@"%ld", (long)_highScore];
+}
+
+-(void)shareImage{
+   [clickSound play];
+   NSString *message = [NSString stringWithFormat:@"OMG!!! I scored %d", _points];
+   message = [message stringByAppendingString:@" points in Destroy Flappy."];
+   
+   UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObjects:message,_image, nil] applicationActivities:nil];
+   activityVC.excludedActivityTypes = @[ UIActivityTypeMessage ,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+   [[CCDirector sharedDirector] presentViewController:activityVC animated:YES completion:nil];
+
 }
 
 #pragma mark iAd Delegate Methods

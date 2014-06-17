@@ -7,7 +7,7 @@
 		<key>DestroyFlappyArtPack/Airspeed_indicator.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1283, 1617}, {476, 476}}</string>
+			<string>{{3092, 360}, {476, 476}}</string>
 			<key>offset</key>
 			<string>{-1, 2}</string>
 			<key>rotated</key>
@@ -20,11 +20,11 @@
 		<key>DestroyFlappyArtPack/Touch Gesture.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1943, 937}, {357, 666}}</string>
+			<string>{{3092, 1}, {357, 666}}</string>
 			<key>offset</key>
 			<string>{-7, -10}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{0, 27}, {357, 666}}</string>
 			<key>sourceSize</key>
@@ -33,11 +33,11 @@
 		<key>DestroyFlappyArtPack/airspeed_indicator_needle.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1639, 2771}, {208, 172}}</string>
+			<string>{{3760, 1}, {208, 172}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{0, 0}, {208, 172}}</string>
 			<key>sourceSize</key>
@@ -137,7 +137,7 @@
 		<key>DestroyFlappyArtPack/fly2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1761, 1617}, {671, 470}}</string>
+			<string>{{1443, 661}, {671, 470}}</string>
 			<key>offset</key>
 			<string>{0, -1}</string>
 			<key>rotated</key>
@@ -150,11 +150,11 @@
 		<key>DestroyFlappyArtPack/gameover.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1283, 1}, {934, 704}}</string>
+			<string>{{2156, 1}, {934, 704}}</string>
 			<key>offset</key>
 			<string>{-3, 3}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{25, 15}, {934, 704}}</string>
 			<key>sourceSize</key>
@@ -202,7 +202,7 @@
 		<key>DestroyFlappyArtPack/metal_crate.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1509, 3163}, {256, 258}}</string>
+			<string>{{1283, 1801}, {256, 258}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -267,7 +267,7 @@
 		<key>DestroyFlappyArtPack/playbutton200x100.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1443, 2771}, {390, 194}}</string>
+			<string>{{3760, 175}, {390, 194}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -277,14 +277,40 @@
 			<key>sourceSize</key>
 			<string>{400, 200}</string>
 		</dict>
+		<key>DestroyFlappyArtPack/sharebutton.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1188, 3476}, {582, 286}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 7}, {582, 286}}</string>
+			<key>sourceSize</key>
+			<string>{600, 300}</string>
+		</dict>
+		<key>DestroyFlappyArtPack/sharebutton200x100.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{3570, 567}, {390, 194}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{5, 3}, {390, 194}}</string>
+			<key>sourceSize</key>
+			<string>{400, 200}</string>
+		</dict>
 		<key>DestroyFlappyArtPack/swipe down.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1188, 3476}, {666, 486}}</string>
+			<string>{{1283, 1133}, {666, 486}}</string>
 			<key>offset</key>
 			<string>{4, -90}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{21, 197}, {666, 486}}</string>
 			<key>sourceSize</key>
@@ -293,11 +319,11 @@
 		<key>DestroyFlappyArtPack/swipe right.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1283, 937}, {658, 678}}</string>
+			<string>{{1476, 3437}, {658, 678}}</string>
 			<key>offset</key>
 			<string>{8, -8}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{29, 19}, {658, 678}}</string>
 			<key>sourceSize</key>
@@ -306,11 +332,11 @@
 		<key>DestroyFlappyArtPack/swipe up.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1443, 2095}, {674, 658}}</string>
+			<string>{{1443, 1}, {674, 658}}</string>
 			<key>offset</key>
 			<string>{10, 8}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
 			<string>{{23, 13}, {674, 658}}</string>
 			<key>sourceSize</key>
