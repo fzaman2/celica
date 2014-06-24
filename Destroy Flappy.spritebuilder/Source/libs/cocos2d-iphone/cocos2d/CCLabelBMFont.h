@@ -51,7 +51,36 @@
  
  */
 
-@interface CCLabelBMFont : CCNode <CCLabelProtocol, CCTextureProtocol>
+@interface CCLabelBMFont : CCSpriteBatchNode <CCLabelProtocol> {
+    
+	// The text displayed by the label.
+	NSString *_string;
+    
+    // The font file of the text.
+    NSString *_fntFile;
+    
+    // The original text excluding line breaks.
+    NSString *_initialString;
+    
+    // The maximum width allowed before a line break will be inserted.
+    float _width;
+    
+    // The technique used for horizontal aligning of the text.
+    CCTextAlignment _alignment;
+    
+    // Parsed configuration of the font file.
+	CCBMFontConfiguration	*_configuration;
+    
+	// Texture RGBA settings.
+	BOOL		_opacityModifyRGB;
+
+    // Offset of the texture atlas.
+	CGPoint			_imageOffset;
+	
+	// Reused char.
+	CCSprite		*_reusedChar;
+}
+
 
 /// -----------------------------------------------------------------------
 /// @name Accessing the Text Attributes

@@ -66,7 +66,7 @@
 
 @implementation CCTapDownGestureRecognizer
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     if (self.state == UIGestureRecognizerStatePossible)
     {
@@ -74,8 +74,16 @@
     }
 }
 
-@end
+-(void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    self.state = UIGestureRecognizerStateFailed;
+}
 
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    self.state = UIGestureRecognizerStateFailed;
+}
+@end
 #endif
 
 

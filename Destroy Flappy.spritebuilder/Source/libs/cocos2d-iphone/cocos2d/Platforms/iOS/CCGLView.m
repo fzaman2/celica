@@ -77,6 +77,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "../../CCDirector.h"
 #import "../../ccMacros.h"
 #import "../../CCConfiguration.h"
+#import "../../Support/OpenGL_Internal.h"
 #import "CCScene.h"
 
 #import "CCDirector_Private.h"
@@ -151,7 +152,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
          */
         self.multipleTouchEnabled = YES;
 
-		CC_CHECK_GL_ERROR_DEBUG();
+		CHECK_GL_ERROR_DEBUG();
 	}
 
 	return self;
@@ -173,7 +174,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 			return nil;
 		}
 
-		CC_CHECK_GL_ERROR_DEBUG();
+		CHECK_GL_ERROR_DEBUG();
     }
 
     return self;
@@ -204,7 +205,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 	_discardFramebufferSupported = [[CCConfiguration sharedConfiguration] supportsDiscardFramebuffer];
 
-	CC_CHECK_GL_ERROR_DEBUG();
+	CHECK_GL_ERROR_DEBUG();
 
 	return YES;
 }
@@ -283,7 +284,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	if( _multiSampling )
 		glBindFramebuffer(GL_FRAMEBUFFER, [_renderer msaaFrameBuffer]);
 
-	CC_CHECK_GL_ERROR_DEBUG();
+	CHECK_GL_ERROR_DEBUG();
 }
 
 -(void) lockOpenGLContext

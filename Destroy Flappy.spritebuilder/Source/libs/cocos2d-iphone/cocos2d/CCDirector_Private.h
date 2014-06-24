@@ -24,13 +24,7 @@
 
 #import "CCDirector.h"
 
-@interface CCDirector () {
-	@protected
-	GLKMatrix4 _projectionMatrix;
-	__weak id<CCDirectorDelegate> _delegate;
-	__weak NSThread *_runningThread;
-
-}
+@interface CCDirector ()
 
 /* Whether or not the replaced scene will receive the cleanup message.
  If the new scene is pushed, then the old scene won't receive the "cleanup" message.
@@ -52,16 +46,8 @@
  */
 @property (nonatomic,readwrite,strong) CCActionManager *actionManager;
 
-/* CCFixedActionManager associated with this director
- */
-@property (nonatomic,readwrite,strong) CCActionManager *actionManagerFixed;
-
-
 /// Rect of the visible screen area in GL coordinates.
 @property(nonatomic, readonly) CGRect viewportRect;
-
-/// Update the list of default globals and return them.
--(NSDictionary *)updateGlobalShaderUniforms;
 
 /* Sets the glViewport*/
 -(void) setViewport;
@@ -81,11 +67,8 @@
  */
 -(void) drawScene;
 
-@end
-
-
-@interface CCDirector(Stats)
-
+// helper
+/* creates the Stats labels */
 -(void) createStatsLabel;
 
 @end

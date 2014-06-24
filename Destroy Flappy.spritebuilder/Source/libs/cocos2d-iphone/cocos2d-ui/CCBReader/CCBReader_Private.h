@@ -8,7 +8,7 @@
 
 #import "CCBReader.h"
 
-#define kCCBVersion 10
+#define kCCBVersion 6
 
 enum {
     kCCBPropTypePosition = 0,
@@ -40,9 +40,6 @@ enum {
     kCCBPropTypeFloatScale,
     kCCBPropTypeFloatXY,
     kCCBPropTypeColor4,
-    kCCBPropTypeNodeReference,
-    kCCBPropTypeFloatCheck,
-    
 };
 
 enum {

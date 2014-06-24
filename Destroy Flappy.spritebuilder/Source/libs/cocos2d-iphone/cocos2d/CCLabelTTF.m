@@ -29,7 +29,8 @@
 #import "CCLabelTTF.h"
 #import "Support/CGPointExtension.h"
 #import "ccMacros.h"
-#import "CCShader.h"
+#import "CCShaderCache.h"
+#import "CCGLProgram.h"
 #import "Support/CCFileUtils.h"
 #import "ccMacros.h"
 #import "ccUtils.h"
@@ -109,14 +110,15 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 }
 
 // This is a private initializer
-- (id) initWithAttributedString:(NSAttributedString *)attrString fontName:(NSString*)fontName fontSize:(CGFloat)fontSize dimensions:(CGSize)dimensions
+- (id) initWithAttributedString:(NSAttributedString *)attrString fontName:(NSString*)fontName fontSize:(float)fontSize dimensions:(CGSize)dimensions
 {
     if ( (self = [super init]) )
     {
         if (!fontName) fontName = @"Helvetica";
         if (!fontSize) fontSize = 12;
         
-				self.blendMode = [CCBlendMode premultipliedAlphaMode];
+        _blendFunc.src = CC_BLEND_SRC;
+        _blendFunc.dst = CC_BLEND_DST;
         
         // other properties
         self.fontName = fontName;
@@ -179,7 +181,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 	}
 }
 
-- (void) setFontSize:(CGFloat)fontSize
+- (void) setFontSize:(float)fontSize
 {
 	if( fontSize != _fontSize ) {
 		_fontSize = fontSize;
@@ -205,7 +207,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     }
 }
 
-- (void) setMinimumFontSize:(CGFloat)minimumFontSize
+- (void) setMinimumFontSize:(float)minimumFontSize
 {
     if (minimumFontSize != _minimumFontSize)
     {
@@ -272,7 +274,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     return [self convertPositionToPoints:self.shadowOffset type:_shadowOffsetType];
 }
 
-- (void) setShadowBlurRadius:(CGFloat)shadowBlurRadius
+- (void) setShadowBlurRadius:(float)shadowBlurRadius
 {
     if (_shadowBlurRadius != shadowBlurRadius)
     {
@@ -290,7 +292,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     }
 }
 
-- (void) setOutlineWidth:(CGFloat)outlineWidth
+- (void) setOutlineWidth:(float)outlineWidth
 {
     if (outlineWidth != _outlineWidth)
     {
@@ -314,14 +316,14 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     [super onEnter];
 }
 
-- (void) visit:(CCRenderer *)renderer parentTransform:(const GLKMatrix4 *)parentTransform
+- (void) visit
 {
     if (_isTextureDirty)
     {
         [self updateTexture];
     }
     
-    [super visit:renderer parentTransform:parentTransform];
+    [super visit];
 }
 
 - (void) setTextureDirty
@@ -452,17 +454,25 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     // Generate a new texture from the attributed string
 	CCTexture *tex;
     
-	tex = [self createTextureWithAttributedString:[formattedAttributedString copyAdjustedForContentScaleFactor] useFullColor:useFullColor];
+    tex = [self createTextureWithAttributedString:[formattedAttributedString copyAdjustedForContentScaleFactor] useFullColor:useFullColor];
 
-	if(!tex) return NO;
+	if( !tex )
+		return NO;
     
-	self.shader = (useFullColor ? [CCShader positionTextureColorShader] : [CCShader positionTextureA8ColorShader]);
+    if (!useFullColor)
+    {
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
+    }
+    else
+    {
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureColor];
+    }
 
     // Update texture and content size
 	[self setTexture:tex];
 	
 	CGRect rect = CGRectZero;
-	rect.size = [self.texture contentSize];
+	rect.size = [_texture contentSize];
 	[self setTextureRect: rect];
 	
 	return YES;
@@ -474,27 +484,27 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     
     CGSize originalDimensions = _dimensions;
   
-    CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
+		CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
     originalDimensions.width *= scale;
     originalDimensions.height *= scale;
     
-    CGSize dimensions = [self convertContentSizeToPoints:originalDimensions type:_dimensionsType];
+    CGSize dimensions = originalDimensions;
     
-    CGFloat shadowBlurRadius = _shadowBlurRadius * scale;
+    float shadowBlurRadius = _shadowBlurRadius * scale;
     CGPoint shadowOffset = ccpMult(self.shadowOffsetInPoints, scale);
-    CGFloat outlineWidth = _outlineWidth * scale;
+    float outlineWidth = _outlineWidth * scale;
     
     BOOL hasShadow = (_shadowColor.alpha > 0);
     BOOL hasOutline = (_outlineColor.alpha > 0 && _outlineWidth > 0);
     
-    CGFloat xOffset = 0;
-    CGFloat yOffset = 0;
-    CGFloat scaleFactor = 1;
+    float xOffset = 0;
+    float yOffset = 0;
+    float scaleFactor = 1;
     
-    CGFloat xPadding = 0;
-    CGFloat yPadding = 0;
-    CGFloat wDrawArea = 0;
-    CGFloat hDrawArea = 0;
+    float xPadding = 0;
+    float yPadding = 0;
+    float wDrawArea = 0;
+    float hDrawArea = 0;
     
     // Calculate padding
     if (hasShadow)
@@ -518,9 +528,6 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         dimensions = [attributedString boundingRectWithSize:NSSizeFromCGSize(dimensions) options:NSStringDrawingUsesLineFragmentOrigin].size;
 #endif
         
-        dimensions.width = ceil(dimensions.width);
-        dimensions.height = ceil(dimensions.height);
-        
         wDrawArea = dimensions.width;
         hDrawArea = dimensions.height;
         
@@ -535,7 +542,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         // Handle strings with fixed dimensions
         if (_adjustsFontSizeToFit)
         {
-            CGFloat fontSize = [attributedString singleFontSize];
+            float fontSize = [attributedString singleFontSize];
             if (fontSize)
             {
                 // This is a string that can be resized (it only uses one font and size)
@@ -545,8 +552,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
                 CGSize wantedSize = [attributedString boundingRectWithSize:CGSizeZero options:NSStringDrawingUsesLineFragmentOrigin].size;
 #endif
                 
-                CGFloat wScaleFactor = 1;
-                CGFloat hScaleFactor = 1;
+                float wScaleFactor = 1;
+                float hScaleFactor = 1;
                 if (wantedSize.width > wDrawArea)
                 {
                     wScaleFactor = wDrawArea/wantedSize.width;
@@ -561,8 +568,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             
                 if (scaleFactor != 1)
                 {
-                    CGFloat newFontSize = fontSize * scaleFactor;
-                    CGFloat minFontSize = _minimumFontSize * scale;
+                    float newFontSize = fontSize * scaleFactor;
+                    float minFontSize = _minimumFontSize * scale;
                     if (minFontSize && newFontSize < minFontSize) newFontSize = minFontSize;
                     attributedString = [attributedString copyWithNewFontSize:newFontSize];
                 }
@@ -606,6 +613,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     // Render the label - different code for Mac / iOS
     
 #ifdef __CC_PLATFORM_IOS
+    yOffset = (POTSize.height - dimensions.height) + yOffset;
+	
 	CGRect drawArea = CGRectMake(xOffset, yOffset, wDrawArea, hDrawArea);
     
     unsigned char* data = calloc(POTSize.width, POTSize.height * 4);
@@ -620,6 +629,9 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         return NULL;
     }
     
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, POTSize.height * 2 - dimensions.height);
+    CGContextConcatCTM(context, flipVertical);
+    
 	UIGraphicsPushContext(context);
     
     // Handle shadow
@@ -627,7 +639,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     {
         UIColor* color = _shadowColor.UIColor;
         
-        CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x, -shadowOffset.y), shadowBlurRadius, [color CGColor]);
+        CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x, shadowOffset.y), shadowBlurRadius, [color CGColor]);
     }
     
     // Handle outline
@@ -638,21 +650,23 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         CGContextSetTextDrawingMode(context, kCGTextFillStroke);
         CGContextSetLineWidth(context, outlineWidth * 2);
         CGContextSetLineJoin(context, kCGLineJoinRound);
-
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        
         NSMutableAttributedString* outlineString = [attributedString mutableCopy];
-        [outlineString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, outlineString.length)];
+        [outlineString removeAttribute:NSForegroundColorAttributeName range:NSMakeRange(0, outlineString.length)];
         
         [outlineString drawInRect:drawArea];
-
+        
+        CGContextSetTextDrawingMode(context, kCGTextFill);
+        
         // Don't draw shadow for main font
         CGContextSetShadowWithColor(context, CGSizeZero, 0, NULL);
-
+        
         if (hasShadow)
         {
             // Draw outline again because shadow overlap
             [outlineString drawInRect:drawArea];
         }
-        CGContextSetTextDrawingMode(context, kCGTextFill);
     }
     
     [attributedString drawInRect:drawArea];
@@ -667,18 +681,16 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 	
 	NSImage *image = [[NSImage alloc] initWithSize:POTSize];
 	[image lockFocus];
-    [[NSAffineTransform transform] set];
+	[[NSAffineTransform transform] set];
     
     // XXX: The shadows are for some reason scaled on OS X if a retina display is connected
-    CGFloat retinaFix = 1;
+    float retinaFix = 1;
     for (NSScreen* screen in [NSScreen screens])
     {
         if (screen.backingScaleFactor > retinaFix) retinaFix = screen.backingScaleFactor;
     }
     
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-		CGContextSaveGState(context);
-		CGContextConcatCTM(context, CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, POTSize.height));
     
     // Handle shadow
     if (hasShadow || hasOutline)
@@ -690,7 +702,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 
             NSColor* color = [NSColor colorWithCalibratedRed:_shadowColor.red green:_shadowColor.green blue:_shadowColor.blue alpha:_shadowColor.alpha];
             
-            CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x/retinaFix, -shadowOffset.y/retinaFix), shadowBlurRadius/retinaFix, [color CGColor]);
+            CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x/retinaFix, shadowOffset.y/retinaFix), shadowBlurRadius/retinaFix, [color CGColor]);
         }
         
         if (hasOutline)
@@ -716,7 +728,6 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     }
 	
     [attributedString drawWithRect:NSRectFromCGRect(drawArea) options:NSStringDrawingUsesLineFragmentOrigin];
-		CGContextRestoreGState(context);
 	
 	NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect (0.0f, 0.0f, POTSize.width, POTSize.height)];
 	[image unlockFocus];
@@ -743,7 +754,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             dst[i] = data[i*4+3];
         
         texture = [[CCTexture alloc] initWithData:data pixelFormat:CCTexturePixelFormat_A8 pixelsWide:POTSize.width pixelsHigh:POTSize.height contentSizeInPixels:dimensions contentScale:[CCDirector sharedDirector].contentScaleFactor];
-        self.shader = [CCShader positionTextureA8ColorShader];
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
     }
     
 #ifdef __CC_PLATFORM_IOS
@@ -771,13 +782,20 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     CCTexture* tex = [self createTextureWithString:string useFullColor:useFullColor];
     if (!tex) return NO;
     
-		self.shader = (useFullColor ? [CCShader positionTextureColorShader] : [CCShader positionTextureA8ColorShader]);
+    if (!useFullColor)
+    {
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
+    }
+    else
+    {
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureColor];
+    }
         
     // Update texture and content size
 	[self setTexture:tex];
 	
 	CGRect rect = CGRectZero;
-	rect.size = [self.texture contentSize];
+	rect.size = [_texture contentSize];
 	[self setTextureRect: rect];
 	
 	return YES;
@@ -786,23 +804,23 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
 - (CCTexture*) createTextureWithString:(NSString*) string useFullColor:(BOOL)useFullColor
 {
     // Scale everything up by content scale
-    CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
+		CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
     UIFont* font = [UIFont fontWithName:_fontName size:_fontSize * scale];
-    CGFloat shadowBlurRadius = _shadowBlurRadius * scale;
+    float shadowBlurRadius = _shadowBlurRadius * scale;
     CGPoint shadowOffset = ccpMult(self.shadowOffsetInPoints, scale);
-    CGFloat outlineWidth = _outlineWidth * scale;
+    float outlineWidth = _outlineWidth * scale;
     
     BOOL hasShadow = (_shadowColor.alpha > 0);
     BOOL hasOutline = (_outlineColor.alpha > 0 && _outlineWidth > 0);
     
-    CGFloat xOffset = 0;
-    CGFloat yOffset = 0;
-    CGFloat scaleFactor = 1;
+    float xOffset = 0;
+    float yOffset = 0;
+    float scaleFactor = 1;
     
-    CGFloat xPadding = 0;
-    CGFloat yPadding = 0;
-    CGFloat wDrawArea = 0;
-    CGFloat hDrawArea = 0;
+    float xPadding = 0;
+    float yPadding = 0;
+    float wDrawArea = 0;
+    float hDrawArea = 0;
     
     CGSize originalDimensions = _dimensions;
     originalDimensions.width *= scale;
@@ -850,12 +868,12 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         // Handle strings with fixed dimensions
         if (_adjustsFontSizeToFit)
         {
-            CGFloat fontSize = font.pointSize;
+            float fontSize = font.pointSize;
             CGSize wantedSizeFirstLine = [string sizeWithFont:font];
             CGSize wantedSize = [string sizeWithFont:font constrainedToSize:CGSizeMake(wantedSizeFirstLine.width, 1024) lineBreakMode:0];
             
-            CGFloat wScaleFactor = 1;
-            CGFloat hScaleFactor = 1;
+            float wScaleFactor = 1;
+            float hScaleFactor = 1;
             if (wantedSize.width > wDrawArea)
             {
                 wScaleFactor = wDrawArea/wantedSize.width;
@@ -870,8 +888,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             
             if (scaleFactor != 1)
             {
-                CGFloat newFontSize = fontSize * scaleFactor;
-                CGFloat minFontSize = _minimumFontSize * scale;
+                float newFontSize = fontSize * scaleFactor;
+                float minFontSize = _minimumFontSize * scale;
                 if (minFontSize && newFontSize < minFontSize) newFontSize = minFontSize;
                 font = [UIFont fontWithName:font.fontName size:newFontSize];
             }
@@ -908,6 +926,8 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     if( POTSize.height == 0)
     POTSize.height = 2;
 
+    yOffset = (POTSize.height - dimensions.height) + yOffset;
+
     CGRect drawArea = CGRectMake(xOffset, yOffset, wDrawArea, hDrawArea);
 
     unsigned char* data = calloc(POTSize.width, POTSize.height * 4);
@@ -922,6 +942,9 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
         return NULL;
     }
 
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, POTSize.height * 2 - dimensions.height);
+    CGContextConcatCTM(context, flipVertical);
+
     UIGraphicsPushContext(context);
     
     // Handle shadow
@@ -929,7 +952,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
     {
         UIColor* color = _shadowColor.UIColor;
         
-        CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x, -shadowOffset.y), shadowBlurRadius, [color CGColor]);
+        CGContextSetShadowWithColor(context, CGSizeMake(shadowOffset.x, shadowOffset.y), shadowBlurRadius, [color CGColor]);
     }
     
     // Handle outline
@@ -985,7 +1008,7 @@ static __strong NSMutableDictionary* ccLabelTTF_registeredFonts;
             dst[i] = data[i*4+3];
         
         texture = [[CCTexture alloc] initWithData:data pixelFormat:CCTexturePixelFormat_A8 pixelsWide:POTSize.width pixelsHigh:POTSize.height contentSizeInPixels:dimensions contentScale:[CCDirector sharedDirector].contentScaleFactor];
-        self.shader = [CCShader positionTextureA8ColorShader];
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
     }
 
     free(data);

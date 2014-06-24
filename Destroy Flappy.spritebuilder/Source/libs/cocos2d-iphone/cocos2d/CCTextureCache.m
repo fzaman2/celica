@@ -46,7 +46,6 @@
 #endif
 
 #import "CCTexture_Private.h"
-#import "CCRenderer_private.h"
 
 // needed for CCCallFuncO in Mac-display_link version
 //#import "CCActionManager.h"
@@ -383,8 +382,6 @@ static CCTextureCache *sharedTextureCache;
 
 -(void) removeUnusedTextures
 {
-    [CCRENDERSTATE_CACHE flush];
-		
     dispatch_sync(_dictQueue, ^{
         NSArray *keys = [_textures allKeys];
         for(id key in keys)

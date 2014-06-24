@@ -36,8 +36,6 @@
     CCButton* _btnNext;
     CCButton* _btnReload;
     
-    CCSprite9Slice* _headerBg;
-    
     NSInteger _currentTest;
 }
 

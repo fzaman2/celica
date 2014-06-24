@@ -27,33 +27,19 @@
 
 @implementation CCBSequenceProperty
 
+@synthesize name;
+@synthesize type;
+@synthesize keyframes;
+
 - (id) init
 {
     self = [super init];
     if (!self) return NULL;
     
-    _name      = @"";
-    _type      = 0;
-    _keyframes = [[NSMutableArray alloc] init];
+    keyframes = [[NSMutableArray alloc] init];
     
     return self;
 }
 
-- (NSString *)description {
-        NSString *description = [NSString localizedStringWithFormat:@"[CCAnimationSequenceProperty] Name: %@, Type: %d, Keyframes: %@", self.name, self.type, self.keyframes];
-    
-    return description;
-}
-
-+ (NSString *)getPropertyNameFromTypeId:(CCBSequencePropertyType)propertyType {
-    
-    switch(propertyType) {
-        case CCBSequencePropertyTypeSpriteFrame:
-            return @"spriteFrame";
-            break;
-    }
-    
-    return nil;
-}
 
 @end

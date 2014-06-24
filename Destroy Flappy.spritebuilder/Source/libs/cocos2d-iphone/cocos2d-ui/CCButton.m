@@ -343,7 +343,7 @@
 - (void) setHitAreaExpansion:(float)hitAreaExpansion
 {
     _originalHitAreaExpansion = hitAreaExpansion;
-    [super setHitAreaExpansion:hitAreaExpansion];
+    [super hitAreaExpansion];
 }
 
 - (float) hitAreaExpansion
@@ -450,7 +450,8 @@
 
 - (NSArray*) keysForwardedToLabel
 {
-    return @[@"fontName",
+    return [NSArray arrayWithObjects:
+            @"fontName",
             @"fontSize",
             @"opacity",
             @"color",
@@ -461,8 +462,7 @@
             @"shadowBlurRadius",
             @"shadowOffset",
             @"shadowOffsetType",
-            @"horizontalAlignment",
-            @"verticalAlignment"];
+            nil];
 }
 
 - (void) setValue:(id)value forKey:(NSString *)key

@@ -40,7 +40,16 @@
 
 @class CCProxy;
 
-@interface CCSpriteFrame : NSObject <NSCopying>
+@interface CCSpriteFrame : NSObject <NSCopying> {
+	CGRect			_rectInPixels;
+	BOOL			_rotated;
+	CGPoint			_offsetInPixels;
+	CGSize			_originalSizeInPixels;
+	CCTexture		*_texture;
+	NSString		*_textureFilename;
+	CCProxy *_proxy;
+}
+
 
 /// -----------------------------------------------------------------------
 /// @name Accessing Sprite Frame Attributes
