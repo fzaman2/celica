@@ -46,7 +46,20 @@
 
  */
 
-@interface CCParticleSystem : CCParticleSystemBase
+@interface CCParticleSystem : CCParticleSystemBase {
+    
+    // Quads to be rendered.
+	ccV3F_C4B_T2F_Quad	*_quads;
+    
+    // Indices.
+	GLushort			*_indices;
+    
+    // VAO.
+	GLuint				_VAOname;
+    
+    //0: vertex  1: indices.
+	GLuint				_buffersVBO[2];
+}
 
 /**
  *  Set particle system texture using specified texture and texture coords value.

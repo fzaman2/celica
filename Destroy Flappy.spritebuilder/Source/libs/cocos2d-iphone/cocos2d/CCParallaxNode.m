@@ -95,15 +95,7 @@
 
 -(void) removeChild:(CCNode*)node cleanup:(BOOL)cleanup
 {
-	for(NSUInteger i = 0; i < _parallaxArray.count; i++){
-		CGPointObject *point = _parallaxArray[i];
-		
-		if(point.child == node) {
-			[_parallaxArray removeObjectAtIndex:i];
-			break;
-		}
-	}
-
+	[_parallaxArray removeObject:node];
 	[super removeChild:node cleanup:cleanup];
 }
 
@@ -132,7 +124,7 @@
    - using a timer is not guaranteed that it will called after all the positions were updated
    - overriding "draw" will only be precise if the children have a z > 0
 */
--(void) visit:(CCRenderer *)renderer parentTransform:(const GLKMatrix4 *)parentTransform
+-(void) visit
 {
 //	CGPoint pos = _position;
 //	CGPoint	pos = [self convertToWorldSpace:CGPointZero];
@@ -147,6 +139,6 @@
 		_lastPosition = pos;
 	}
 
-	[super visit:renderer parentTransform:parentTransform];
+	[super visit];
 }
 @end

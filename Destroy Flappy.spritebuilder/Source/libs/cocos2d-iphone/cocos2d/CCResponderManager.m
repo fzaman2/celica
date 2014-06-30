@@ -103,29 +103,31 @@
     _dirty = NO;
 }
 
-- (void)buildResponderList:(CCNode *)node
+-( void )buildResponderList:(CCNode *)node
 {
+    BOOL nodeAdded = NO;
+    
     // dont add invisible nodes
     if (!node.visible) return;
     
-    BOOL shouldAddNode = node.isUserInteractionEnabled;
-    
-    if (node.children.count)
+    if ((node.children) && (node.children.count > 0))
     {
-        // scan through children, and build responder list
+        // scan through children, and build responderlist
         for (CCNode *child in node.children)
         {
-            if (shouldAddNode && child.zOrder >= 0)
+            if ((child.zOrder >= 0) && (!nodeAdded) && (node.isUserInteractionEnabled))
             {
                 [self addResponder:node];
-                shouldAddNode = NO;
+                nodeAdded = YES;
             }
             [self buildResponderList:child];
         }
     }
-    
-    // if eligible, add the current node to the responder list
-    if (shouldAddNode) [self addResponder:node];
+    else
+    {
+        // only add self
+        if (node.isUserInteractionEnabled) [self addResponder:node];
+    }
 }
 
 // -----------------------------------------------------------------

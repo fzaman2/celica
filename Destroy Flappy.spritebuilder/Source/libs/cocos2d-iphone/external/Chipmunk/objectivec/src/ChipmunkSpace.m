@@ -212,8 +212,6 @@ both(cpFloat, collisionBias, CollisionBias);
 both(cpTimestamp, collisionPersistence, CollisionPersistence);
 getter(cpFloat, currentTimeStep, CurrentTimeStep);
 
-- (BOOL)isLocked {return cpSpaceIsLocked(_space);}
-
 - (ChipmunkBody *)staticBody {return _staticBody;}
 
 typedef BOOL (*BeginProto)(id, SEL, cpArbiter *, ChipmunkSpace *);

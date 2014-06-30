@@ -39,7 +39,12 @@
 /**
  * CCNodeColor is a subclass of CCNode that is used to generate solid colors.
  */
-@interface CCNodeColor : CCNode <CCShaderProtocol, CCBlendProtocol>
+@interface CCNodeColor : CCNode <CCBlendProtocol> {
+	ccVertex2F	_squareVertices[4];
+	ccColor4F	_squareColors[4];
+	ccBlendFunc	_blendFunc;
+}
+
 
 /// -----------------------------------------------------------------------
 /// @name Creating a CCNodeColor Object
@@ -90,6 +95,9 @@
  */
 -(id) initWithColor:(CCColor*)color;
 
+/** Blend method to use. */
+@property (nonatomic,readwrite) ccBlendFunc blendFunc;
+
 @end
 
 #pragma mark - CCNodeGradient
@@ -113,6 +121,7 @@
 @interface CCNodeGradient : CCNodeColor {
 	ccColor4F _endColor;
 	CGPoint _vector;
+	BOOL	_compressedInterpolation;
 }
 
 
@@ -187,11 +196,11 @@
 /** The vector along which to fade color. */
 @property (nonatomic, readwrite) CGPoint vector;
 
-/**
- *	Deprecated in 3.1. All colors are correctly displayed across the node's rectangle.
+/** Whether or not the interpolation will be compressed in order to display all the colors of the gradient both in canonical and non canonical vectors.
+ *
  *  Default: YES.
  */
-@property (nonatomic, readwrite) BOOL compressedInterpolation __attribute__((deprecated));
+@property (nonatomic, readwrite) BOOL compressedInterpolation;
 
 @end
 
@@ -202,7 +211,7 @@
  *  Features:
  *
  *  - It supports one or more children
- *  - Only one child will be active a time
+ *  - Only one children will be active a time
  */
 @interface CCNodeMultiplexer : CCNode {
 	unsigned int _enabledNode;
@@ -215,21 +224,21 @@
 /// -----------------------------------------------------------------------
 
 /**
- *  Creates a CCNodeMultiplexer with an array of nodes.
+ *  Creates a CCNodeMultiplexer with an array of layers.
  *
  *  @param arrayOfNodes Array of nodes.
  *
- *  @return The CCNodeMultiplexer object.
+ *  @return The CCNodeMultiplexer Object.
  */
 +(id)nodeWithArray:(NSArray*)arrayOfNodes;
 
-/** Creates a CCMultiplexLayer with one or more nodes using a variable argument list.
+/** Creates a CCMultiplexLayer with one or more layers using a variable argument list.
  *  Example: 
  *  @code mux = [CCNodeMultiplexer nodeWithNodes:nodeA, nodeB, nodeC, nil];
  *  
  *  @param node List of nodes.
  *  @param ... Nil terminator.
- *  @return The CCNodeMultiplexer object.
+ *  @return The CCNodeMultiplexer Object.
  */
 +(id)nodeWithNodes:(CCNode*)node, ... NS_REQUIRES_NIL_TERMINATION;
 
@@ -239,7 +248,7 @@
 /// -----------------------------------------------------------------------
 
 /**
- *  Initializes a CCNodeMultiplexer with an array of nodes.
+ *  Initializes a CCNodeMultiplexer with an array of layers.
  *
  *  @param arrayOfNodes Array of nodes.
  *

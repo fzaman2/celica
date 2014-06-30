@@ -488,28 +488,15 @@
 #pragma mark - CCRotateTo
 
 @implementation CCActionRotateTo
-
 +(id) actionWithDuration: (CCTime) t angle:(float) a
 {
-	return [[self alloc] initWithDuration:t angle:a simple:NO];
-}
-
-+(id) actionWithDuration: (CCTime) t angle:(float) a simple:(bool)simple
-{
-	return [[self alloc] initWithDuration:t angle:a simple:simple];
+	return [[self alloc] initWithDuration:t angle:a ];
 }
 
 -(id) initWithDuration: (CCTime) t angle:(float) a
 {
-	return [self initWithDuration:t angle:a simple:NO];
-}
-
--(id) initWithDuration: (CCTime) t angle:(float) a simple:(bool) simple
-{
-	if( (self=[super initWithDuration: t]) ) {
+	if( (self=[super initWithDuration: t]) )
 		_dstAngleX = _dstAngleY = a;
-        _simple    = simple;
-    }
 
 	return self;
 }
@@ -523,71 +510,22 @@
 {
 	if( (self=[super initWithDuration: t]) ){
 		_dstAngleX = aX;
-        _dstAngleY = aY;
-        _rotateX   = YES;
-        _rotateY   = YES;
-    }
+    _dstAngleY = aY;
+  }
 	return self;
 }
-
-+(id) actionWithDuration: (CCTime) t angleX:(float) aX
-{
-	return [[self alloc] initWithDuration:t angleX:aX];
-}
-
--(id) initWithDuration: (CCTime) t angleX:(float) aX
-{
-	if( (self=[super initWithDuration: t]) ){
-		_dstAngleX = aX;
-        _rotateX   = YES;
-    }
-	return self;
-}
-
-+(id) actionWithDuration: (CCTime) t angleY:(float) aY
-{
-	return [[self alloc] initWithDuration:t angleY:aY];
-}
-
--(id) initWithDuration: (CCTime) t angleY:(float) aY
-{
-	if( (self=[super initWithDuration: t]) ){
-		_dstAngleY = aY;
-        _rotateY   = YES;
-    }
-	return self;
-}
-
 
 -(id) copyWithZone: (NSZone*) zone
 {
-
-    if(_rotateX && _rotateY) {
-        return [[[self class] allocWithZone: zone] initWithDuration:[self duration] angleX:_dstAngleX angleY:_dstAngleY];
-    } else if (_rotateX) {
-        return [[[self class] allocWithZone: zone] initWithDuration:[self duration] angleX:_dstAngleX];
-    } else if (_rotateY) {
-        return [[[self class] allocWithZone: zone] initWithDuration:[self duration] angleY:_dstAngleY];
-    } else if (_simple) {
-        return [[[self class] allocWithZone: zone] initWithDuration:[self duration] angle:_dstAngleX simple:YES];
-    } else {
-        return [[[self class] allocWithZone: zone] initWithDuration:[self duration] angle:_dstAngleX];
-    }
+	CCAction *copy = [[[self class] allocWithZone: zone] initWithDuration:[self duration] angleX:_dstAngleX angleY:_dstAngleY];
+	return copy;
 }
 
 -(void) startWithTarget:(CCNode *)aTarget
 {
 	[super startWithTarget:aTarget];
-    
-    // Simple Rotation (Support SpriteBuilder)
-    if(_simple) {
-        _startAngleX = _startAngleY = [(CCNode*)_target rotation];
-        _diffAngleX = _dstAngleX - _startAngleX;
-        _diffAngleY = _dstAngleY - _startAngleY;
-        return;
-    }
 
-    //Calculate X
+  //Calculate X
 	_startAngleX = [_target rotationalSkewX];
 	if (_startAngleX > 0)
 		_startAngleX = fmodf(_startAngleX, 360.0f);
@@ -601,7 +539,7 @@
 		_diffAngleX += 360;
   
 	
-   //Calculate Y: It's duplicated from calculating X since the rotation wrap should be the same
+  //Calculate Y: It's duplicated from calculating X since the rotation wrap should be the same
 	_startAngleY = [_target rotationalSkewY];
 	if (_startAngleY > 0)
 		_startAngleY = fmodf(_startAngleY, 360.0f);
@@ -623,10 +561,8 @@
     }
     else
     {
-        if(_rotateX)
-            [_target setRotationalSkewX: _startAngleX + _diffAngleX * t];
-        if(_rotateY)
-            [_target setRotationalSkewY: _startAngleY + _diffAngleY * t];
+        [_target setRotationalSkewX: _startAngleX + _diffAngleX * t];
+        [_target setRotationalSkewY: _startAngleY + _diffAngleY * t];
     }
 }
 @end
@@ -744,7 +680,7 @@
 	CGPoint diff = ccpSub(currentPos, _previousPos);
 	_startPos = ccpAdd( _startPos, diff);
 	CGPoint newPos =  ccpAdd( _startPos, ccpMult(_positionDelta, t) );
-	[(CCNode *)_target setPosition: newPos];
+	[_target setPosition: newPos];
 	_previousPos = newPos;
 #else
 	[node setPosition: ccpAdd( _startPos, ccpMult(_positionDelta, t))];

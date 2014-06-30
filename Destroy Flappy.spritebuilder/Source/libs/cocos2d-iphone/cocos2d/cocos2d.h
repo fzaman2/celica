@@ -40,9 +40,9 @@
  */
 
 // 0x00 HI ME LO
-// 00   03 01 01
-#define COCOS2D_VERSION 0x00030101
-#define COCOS2D_BUILD @"release"
+// 00   03 00 00
+#define COCOS2D_VERSION 0x00030000
+
 //
 // all cocos2d include files
 //
@@ -92,7 +92,10 @@
 #import "CCLayoutBox.h"
 
 // Shaders
-#import "CCShader.h"
+#import "CCGLProgram.h"
+#import "ccGLStateCache.h"
+#import "ccShaders.h"
+#import "CCShaderCache.h"
 
 // Physics
 #import "CCPhysicsBody.h"
@@ -141,13 +144,21 @@
 //
 // cocos2d helper files
 //
+#import "Support/OpenGL_Internal.h"
 #import "Support/CCFileUtils.h"
 #import "Support/CGPointExtension.h"
 #import "Support/ccUtils.h"
+#import "Support/TransformUtils.h"
 #import "Support/CCProfiling.h"
 #import "Support/NSThread+performBlock.h"
 #import "Support/uthash.h"
 #import "Support/utlist.h"
+
+//
+// external
+//
+#import "kazmath/kazmath.h"
+#import "kazmath/GL/matrix.h"
 
 
 
@@ -157,6 +168,7 @@ extern "C" {
 
 // free functions
 NSString * cocos2dVersion(void);
+extern const char * cocos2d_version;
 
 #ifdef __cplusplus
 }

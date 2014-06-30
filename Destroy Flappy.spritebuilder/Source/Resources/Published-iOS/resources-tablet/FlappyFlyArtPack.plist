@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>FlappyFlyArtPack/background.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {640, 1005}}</string>
+			<key>offset</key>
+			<string>{0, 22}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {640, 1005}}</string>
+			<key>sourceSize</key>
+			<string>{640, 1050}</string>
+		</dict>
+		<key>FlappyFlyArtPack/bush.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{643, 1}, {640, 69}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {640, 69}}</string>
+			<key>sourceSize</key>
+			<string>{640, 69}</string>
+		</dict>
+		<key>FlappyFlyArtPack/clouds.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{207, 1008}, {748, 131}}</string>
+			<key>offset</key>
+			<string>{0, -3}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{0, 29}, {748, 131}}</string>
+			<key>sourceSize</key>
+			<string>{748, 183}</string>
+		</dict>
+		<key>FlappyFlyArtPack/fly1.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1779}, {328, 228}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {328, 228}}</string>
+			<key>sourceSize</key>
+			<string>{328, 229}</string>
+		</dict>
+		<key>FlappyFlyArtPack/fly2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{331, 1758}, {324, 220}}</string>
+			<key>offset</key>
+			<string>{2, 4}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{4, 0}, {324, 220}}</string>
+			<key>sourceSize</key>
+			<string>{328, 229}</string>
+		</dict>
+		<key>FlappyFlyArtPack/gameover.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{643, 643}, {438, 321}}</string>
+			<key>offset</key>
+			<string>{-1, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{5, 8}, {438, 321}}</string>
+			<key>sourceSize</key>
+			<string>{450, 337}</string>
+		</dict>
+		<key>FlappyFlyArtPack/ground.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{340, 1008}, {696, 310}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {696, 310}}</string>
+			<key>sourceSize</key>
+			<string>{696, 310}</string>
+		</dict>
+		<key>FlappyFlyArtPack/pipe_bottom.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{104, 1008}, {101, 755}}</string>
+			<key>offset</key>
+			<string>{0, 7}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2, 1}, {101, 755}}</string>
+			<key>sourceSize</key>
+			<string>{106, 772}</string>
+		</dict>
+		<key>FlappyFlyArtPack/pipe_top.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1008}, {101, 769}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{3, 0}, {101, 769}}</string>
+			<key>sourceSize</key>
+			<string>{106, 772}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 2048}</string>
+		<key>textureFileName</key>
+		<string>FlappyFlyArtPack.png</string>
+	</dict>
+</dict>
+</plist>

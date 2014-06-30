@@ -32,6 +32,14 @@
 @class CCTextureAtlas;
 @class CCParticleSystemBase;
 
+/**
+ *  This extension disables lazy z-ordering.
+ */
+@interface CCNode (extension)
+-(void) setZOrder:(NSUInteger) z;
+@end
+
+
 /** 
  CCParticleBatchNode offers improved performance by operating in the same manner as CCSpriteBatchNode by rendering all particles systems as a batch (1 OpenGL Call).
  
@@ -47,8 +55,22 @@
  - Default capacity is 500.
 
  */
-__attribute__((deprecated))
-@interface CCParticleBatchNode : CCNode<CCTextureProtocol, CCShaderProtocol, CCBlendProtocol>
+@interface CCParticleBatchNode : CCNode <CCTextureProtocol> {
+
+	CCTextureAtlas	*_textureAtlas;
+	ccBlendFunc		_blendFunc;
+}
+
+
+/// -----------------------------------------------------------------------
+/// @name Accessing Particle Attributes
+/// -----------------------------------------------------------------------
+
+/** Particle system texture. */
+@property (nonatomic, strong) CCTextureAtlas* textureAtlas;
+
+/** Blend method. */
+@property (nonatomic, readwrite) ccBlendFunc blendFunc;
 
 
 /// -----------------------------------------------------------------------
@@ -118,5 +140,44 @@ __attribute__((deprecated))
  *  @return An initialized CCParticleBatchNode Object.
  */
 -(id)initWithFile:(NSString *)fileImage capacity:(NSUInteger)capacity;
+
+
+/// -----------------------------------------------------------------------
+/// @name Hierarchy Management Methods
+/// -----------------------------------------------------------------------
+
+/**
+ *  Add a particle system to the particle system batch node.
+ *
+ *  @param child Particle System.
+ *  @param z     Z Order.
+ *  @param aTag  Tag.
+ */
+-(void) addChild:(CCParticleSystemBase*)child z:(NSInteger)z tag:(NSInteger) aTag;
+
+/**
+ *  Inserts a particle system to the batch node.
+ *
+ *  @param pSystem Particle System.
+ *  @param index   Index Position.
+ */
+-(void) insertChild:(CCParticleSystemBase*) pSystem inAtlasAtIndex:(NSUInteger)index;
+
+/**
+ *  Remove the specified particle system from the batch node.
+ *
+ *  @param pSystem   Particle System.
+ *  @param doCleanUp Perform cleanup.
+ */
+-(void) removeChild:(CCParticleSystemBase*) pSystem cleanup:(BOOL)doCleanUp;
+
+/** Disables a particle by inserting a 0'd quad into the texture atlas */
+
+/**
+ *  Disables a particle system.
+ *
+ *  @param particleIndex Particle system Index.
+ */
+-(void) disableParticle:(NSUInteger) particleIndex;
 
 @end

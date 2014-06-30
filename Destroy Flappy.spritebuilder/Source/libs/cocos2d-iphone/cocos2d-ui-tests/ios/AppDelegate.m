@@ -26,7 +26,6 @@
 
 #import "AppDelegate.h"
 #import "MainMenu.h"
-#import "TestBase.h"
 
 @implementation AppController
 
@@ -39,22 +38,15 @@
     
     sharedFileUtils.searchPath =
     [NSArray arrayWithObjects:
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Images"],
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Fonts"],
      [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Resources-shared"],
      [[NSBundle mainBundle] resourcePath],
      nil];
     
-    // Register spritesheets.
-    [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Interface.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Sprites.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"TilesAtlassed.plist"];
-    
     [self setupCocos2dWithOptions:@{
-			CCSetupDepthFormat: @GL_DEPTH24_STENCIL8,
+                                    CCSetupDepthFormat: @GL_DEPTH24_STENCIL8,
 //			CCSetupScreenMode: CCScreenModeFixed,
 //			CCSetupScreenOrientation: CCScreenOrientationPortrait,
-			CCSetupTabletScale2X: @YES,
+//			CCSetupTabletScale2X: @YES,
 //			CCSetupShowDebugStats: @YES,
 		}];
     
@@ -63,13 +55,7 @@
 
 - (CCScene*) startScene
 {
-	const char *testName = getenv("Test");
-	
-	if(testName){
-		return [TestBase sceneWithTestName:[NSString stringWithCString:testName encoding:NSUTF8StringEncoding]];
-	} else {
-		return [MainMenu scene];
-	}
+    return [MainMenu scene];
 }
 
 //// I'm going to leave this in for testing the fixed size screen mode in the future.
