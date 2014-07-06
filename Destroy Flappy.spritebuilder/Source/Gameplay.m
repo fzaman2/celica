@@ -234,7 +234,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        _hero.position.y == 340 ||
        _hero.position.y == 420)
     {
-    _swiped = 0.5f;
+    _swiped = 1.0f;
     _newHeroPosition = _hero.position.y;
     }
     }
@@ -248,7 +248,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        _hero.position.y == 340 ||
        _hero.position.y == 420)
     {
-        _swiped = -0.5f;
+        _swiped = -1.0f;
         _newHeroPosition = _hero.position.y;
     }
 }
