@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A10C9EB193813DD00CF88D5 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9EA193813DD00CF88D5 /* Bullet.m */; };
-		3A16F910192EA72D0048C649 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F90F192EA72D0048C649 /* iAd.framework */; };
 		3AA4C9BB191F479F00FB1CF9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA4C9BA191F479F00FB1CF9 /* CoreMotion.framework */; };
 		3ABD95F819512BC2004D8A62 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ABD95F719512BC2004D8A62 /* Images-2.xcassets */; };
 		3ABE1C3E1936D5140036632C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ABE1C3D1936D5140036632C /* Images.xcassets */; };
@@ -156,7 +155,6 @@
 				3AF5D7A11934FCE40031E73B /* CoreTelephony.framework in Frameworks */,
 				3AF5D79F1934FCBD0031E73B /* AdSupport.framework in Frameworks */,
 				3AF5D79B1934FC450031E73B /* libGoogleAdMobAds.a in Frameworks */,
-				3A16F910192EA72D0048C649 /* iAd.framework in Frameworks */,
 				3AA4C9BB191F479F00FB1CF9 /* CoreMotion.framework in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,

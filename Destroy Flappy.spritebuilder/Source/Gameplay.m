@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCNode *_gameOverBox;
     CCLabelTTF *_highScoreValue;
     CCLabelTTF *_scoreValue;
-    ADBannerView *_bannerView;
+    GADBannerView *_bannerView;
     GADInterstitial *interstitial;
     CCLabelTTF *_missileLabel;
    NSInteger _missileCount;
@@ -136,6 +136,24 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
     [self cycleInterstitial]; // Prepare our interstitial for after the game so that we can be certain its ready to present
    
+   // Initialize the banner at the bottom of the screen.
+   CGPoint origin = CGPointMake(0.0,
+                                [CCDirector sharedDirector].view.frame.size.height -
+                                CGSizeFromGADAdSize(kGADAdSizeBanner).height);
+   _bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
+   
+   // Specify the ad unit ID.
+   _bannerView.adUnitID = @"ca-app-pub-3129568560891761/8152886730";
+   
+   // Let the runtime know which UIViewController to restore after taking
+   // the user wherever the ad goes and add it to the view hierarchy.
+   _bannerView.rootViewController = [CCDirector sharedDirector];
+   [[[CCDirector sharedDirector]view]addSubview:_bannerView];
+   // Initiate a generic request to load it with an ad.
+   [_bannerView loadRequest:[GADRequest request]];
+   _bannerView.delegate = self;
+   _bannerView.hidden = YES;
+   
    // The AV Audio Player needs a URL to the file that will be played to be specified.
    // So, we're going to set the audio file's path and then convert it to a URL.
    // Bonus Sound
@@ -193,35 +211,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    
    [errorSound setDelegate:self];
 
-}
-
--(id) init
-{
-    if( (self= [super init]) )
-    {
-        if(_bannerView == nil)
-        {
-        // On iOS 6 ADBannerView introduces a new initializer, use it when available.
-        if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
-            _bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-            
-        } else {
-            _bannerView = [[ADBannerView alloc] init];
-        }
-        
-        [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        [[[CCDirector sharedDirector]view]addSubview:_bannerView];
-        [_bannerView setBackgroundColor:[UIColor clearColor]];
-        [[[CCDirector sharedDirector]view]addSubview:_bannerView];
-        _bannerView.delegate = self;
-        _bannerView.hidden = YES;
-        }
-    }
-    [[[CCDirector sharedDirector]view]bringSubviewToFront:_bannerView];
-    
-    [self layoutAnimated:YES];
-    return self;
-    
 }
 
 -(void)screenWasSwipedUp
@@ -617,9 +606,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
        _image = UIGraphicsGetImageFromCurrentImageContext();
        UIGraphicsEndImageContext();
        
-
-        [self layoutAnimated:YES];
-//        [_bannerView setAlpha:1];
         _bannerView.hidden = NO;
 //        [self runAction:bounce];
     }
@@ -642,38 +628,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 }
 
-#pragma mark iAd Delegate Methods
+#pragma mark GADBannerViewDelegate implementation
 
-- (void)layoutAnimated:(BOOL)animated
-{
-    // As of iOS 6.0, the banner will automatically resize itself based on its width.
-    // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
-    CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
-    
-   // New line of code. Old code was depracted in ios 6
-   [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-   
-    CGRect bannerFrame = _bannerView.frame;
-    if (_bannerView.bannerLoaded) {
-        contentFrame.size.height -= _bannerView.frame.size.height;
-        bannerFrame.origin.y = contentFrame.size.height;
-    } else {
-        bannerFrame.origin.y = contentFrame.size.height;
-    }
-    
-    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-        _bannerView.frame = bannerFrame;
-    }];
+// We've received an ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+   NSLog(@"Received ad successfully");
 }
 
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
-//    CCLOG(@"Successfully loaded banner");
-    [self layoutAnimated:YES];
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-//    CCLOG(@"Failed to load banner with error: %@ ",error);
-    [self layoutAnimated:NO];
+- (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
+   NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 
 #pragma mark -
@@ -699,7 +662,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
    }
    CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
    [[CCDirector sharedDirector] replaceScene:scene];
-   [self layoutAnimated:NO];
    _bannerView.hidden = YES;
 }
 
